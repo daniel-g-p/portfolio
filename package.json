@@ -1,0 +1,23 @@
+{
+    "name": "portfolio",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "watch": "sass --watch src/scss/style.scss css/style.css",
+        "start": "live-server",
+        "compile": "sass src/scss/style.scss src/style.comp.css",
+        "prefix": "postcss-cli src/style.comp.css -u autoprefixer -o src/style.prefix.css",
+        "compress": "sass src/style.prefix.css css/style.css --style compressed"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "autoprefixer": "^10.3.0",
+        "live-server": "^1.2.1",
+        "npm-run-all": "^4.1.5",
+        "postcss-cli": "^8.3.1",
+        "sass": "^1.35.2"
+    }
+}
