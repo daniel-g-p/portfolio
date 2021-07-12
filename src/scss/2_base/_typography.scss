@@ -1,3 +1,4 @@
+@use "../1_abstracts/" as *;
 @font-face {
     font-family: "Montserrat";
     src: url("./fonts/montserrat_regular.woff2") format("woff2"), url("./fonts/montserrat_regular.woff") format("woff");
@@ -17,4 +18,22 @@
     src: url("./fonts/squadaone.woff2") format("woff2"), url("./fonts/squadaone.woff") format("woff");
     font-weight: normal;
     font-style: normal;
+}
+
+.heading-1 {
+    font: 400 3.25rem/1.25 "Squada One", sans-serif;
+    @include responsive($screen-l) {
+        font-size: 4.5rem;
+    }
+}
+
+.heading-2 {}
+
+.heading-3 {
+    font: 700 1rem/1.25 "Montserrat", sans-serif;
+    text-transform: uppercase;
+}
+
+.paragraph {
+    line-height: 2;
 }

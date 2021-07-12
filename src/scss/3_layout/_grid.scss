@@ -4,7 +4,7 @@
     grid-template-columns: [page-start] 1rem [content-start] repeat(12, [column-start] 1fr [column-end]) [content-end] 1rem [page-end];
     grid-auto-rows: max-content;
     @include responsive($screen-xs) {
-        grid-template-columns: [page-start] 1.5 [content-start] repeat(12, [column-start] 1fr [column-end]) [content-end] 1.5 [page-end];
+        grid-template-columns: [page-start] 1.5rem [content-start] repeat(12, [column-start] 1fr [column-end]) [content-end] 1.5rem [page-end];
     }
     @include responsive($screen-s) {
         grid-template-columns: [page-start] 2.5rem [content-start] repeat(12, [column-start] 1fr [column-end]) [content-end] 2.5rem [page-end];

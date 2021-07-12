@@ -7,23 +7,28 @@
     padding: 1rem 0;
     @include flexbox(row, space-between);
     &__logo {
+        opacity: 0.75;
+        transition: opacity 0.25s ease;
         img {
             display: block;
             height: 4rem;
         }
+        &:hover {
+            opacity: 1;
+        }
     }
     &__nav {
         position: fixed;
-        top: -120vh;
+        top: calc(-100vh - 20vw);
         left: 0;
         z-index: 3;
         width: 100vw;
-        height: 120vh;
-        clip-path: polygon(0% 0%, 50% 8%, 100% 0, 100% 92%, 50% 100%, 0% 92%);
+        height: calc(100vh + 10vw);
+        clip-path: polygon(0% 0%, 50% 5vw, 100% 0%, 100% calc(100vh + 5vw), 50% 100%, 0% calc(100vh + 5vw));
         background-image: linear-gradient(to right bottom, $color-green, $color-blue);
         @include flexbox();
         &--active {
-            top: -10vh;
+            top: -5vw;
             transition: top 0.75s ease;
             .header__link-container {
                 opacity: 1;
@@ -32,7 +37,7 @@
             }
         }
         &--exit {
-            top: 120vh;
+            top: 100vh;
             transition: top 0.75s ease 0.25s;
             .header__link-container {
                 transform: translateY(2rem);
@@ -71,6 +76,8 @@
         width: 2rem;
         height: 1.5rem;
         cursor: pointer;
+        opacity: 0.75;
+        transition: opacity 0.25s ease;
         &--active {
             .header__toggle-bar {
                 &--1 {
@@ -87,13 +94,16 @@
                 }
             }
         }
+        &:hover {
+            opacity: 1;
+        }
     }
     &__toggle-bar {
         position: absolute;
         left: 0;
         display: block;
         width: 2rem;
-        height: 0.1rem;
+        height: 0.2rem;
         background-color: $color-white;
         transition: all 0.25s ease;
         &--1 {
