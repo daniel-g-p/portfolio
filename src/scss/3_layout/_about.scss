@@ -1,0 +1,23 @@
+@use "../1_abstracts/" as *;
+.about {
+    grid-column: content-start / content-end;
+    grid-row: 3 / 4;
+    &__title {}
+    &__container {}
+    &__slider {}
+    &__image {}
+    &__option {
+        &--active {}
+        &--1 {}
+        &--2 {}
+        &--3 {}
+        &--4 {}
+    }
+    &__icon {}
+    &__content-box {}
+    &__content {
+        &--active {}
+    }
+    &__heading {}
+    &__text {}
+}

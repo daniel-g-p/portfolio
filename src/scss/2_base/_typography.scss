@@ -27,7 +27,12 @@
     }
 }
 
-.heading-2 {}
+.heading-2 {
+    font: 400 2rem/1.25 "Squada One", sans-serif;
+    @include responsive($screen-l) {
+        font-size: 3rem;
+    }
+}
 
 .heading-3 {
     font: 700 1rem/1.25 "Montserrat", sans-serif;
