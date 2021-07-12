@@ -1,0 +1,46 @@
+@use "../1_abstracts/" as *;
+.link {
+    &:link,
+    &:visited {
+        position: relative;
+        font-weight: 700;
+        line-height: 2;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: transform 0.25s ease;
+        &::before,
+        &::after {
+            position: absolute;
+            content: "";
+            display: block;
+            width: 0%;
+            height: 0.1rem;
+            opacity: 0;
+            background-color: currentColor;
+            transition: opacity 0.25s ease, width 0.25s ease;
+        }
+        &::before {
+            bottom: 100%;
+            right: 0;
+        }
+        &::after {
+            top: 100%;
+            left: 0;
+        }
+    }
+    &:hover,
+    &:focus {
+        transform: scale(1.1);
+        &::before,
+        &::after {
+            width: 100%;
+            opacity: 1;
+        }
+    }
+    --icon {
+        img {
+            display: block;
+            height: 100%;
+        }
+    }
+}

@@ -1,0 +1,110 @@
+@use "../1_abstracts/" as *;
+.header {
+    position: relative;
+    z-index: 1;
+    grid-column: content-start / content-end;
+    grid-row: 1 / 2;
+    padding: 1rem 0;
+    @include flexbox(row, space-between);
+    &__logo {
+        img {
+            display: block;
+            height: 4rem;
+        }
+    }
+    &__nav {
+        position: fixed;
+        top: -120vh;
+        left: 0;
+        z-index: 3;
+        width: 100vw;
+        height: 120vh;
+        clip-path: polygon(0% 0%, 50% 8%, 100% 0, 100% 92%, 50% 100%, 0% 92%);
+        background-image: linear-gradient(to right bottom, $color-green, $color-blue);
+        @include flexbox();
+        &--active {
+            top: -10vh;
+            transition: top 0.75s ease;
+            .header__link-container {
+                opacity: 1;
+                transform: translateY(0);
+                transition: opacity 0.25s ease 0.5s, transform 0.25s ease 0.5s;
+            }
+        }
+        &--exit {
+            top: 120vh;
+            transition: top 0.75s ease 0.25s;
+            .header__link-container {
+                transform: translateY(2rem);
+                transition: opacity 0.25s ease, transform 0.25s ease;
+            }
+        }
+    }
+    &__link-container {
+        @include flexbox(column);
+        opacity: 0;
+        transform: translateY(-2rem);
+    }
+    &__link {
+        margin: 0.5rem 0;
+        color: $color-white;
+    }
+    &__social {
+        margin-top: 1.5rem;
+        @include flexbox();
+    }
+    &__icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin: 0 0.5rem;
+        opacity: 0.75;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+        &:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+    }
+    &__toggle {
+        position: relative;
+        z-index: 5;
+        display: block;
+        width: 2rem;
+        height: 1.5rem;
+        cursor: pointer;
+        &--active {
+            .header__toggle-bar {
+                &--1 {
+                    top: 50%;
+                    transform: translateY(-50%) rotate(135deg);
+                }
+                &--2 {
+                    top: 50%;
+                    transform: translateY(-50%) scale(0);
+                }
+                &--3 {
+                    bottom: 50%;
+                    transform: translateY(50%) rotate(-135deg);
+                }
+            }
+        }
+    }
+    &__toggle-bar {
+        position: absolute;
+        left: 0;
+        display: block;
+        width: 2rem;
+        height: 0.1rem;
+        background-color: $color-white;
+        transition: all 0.25s ease;
+        &--1 {
+            top: 0;
+        }
+        &--2 {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        &--3 {
+            bottom: 0;
+        }
+    }
+}

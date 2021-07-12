@@ -7,8 +7,9 @@
         "watch": "sass --watch src/scss/style.scss css/style.css",
         "start": "live-server",
         "compile": "sass src/scss/style.scss src/style.comp.css",
-        "prefix": "postcss-cli src/style.comp.css -u autoprefixer -o src/style.prefix.css",
-        "compress": "sass src/style.prefix.css css/style.css --style compressed"
+        "prefix": "postcss src/style.comp.css -u autoprefixer -o src/style.prefix.css",
+        "compress": "sass src/style.prefix.css css/style.css --style compressed",
+        "build": "npm-run-all compile prefix compress"
     },
     "keywords": [],
     "author": "",

@@ -1,0 +1,15 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font: 400 125%/1 "Montserrat", sans-serif;
+}
+
+body {
+    box-sizing: border-box;
+}

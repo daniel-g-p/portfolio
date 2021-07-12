@@ -1,2 +1,7 @@
-@use "./2_base/reset";
+@use "./1_abstracts/" as *;
 @use "./2_base/typography";
+@use "./2_base/reset";
+@use "./3_layout/grid";
+@use "./3_layout/header";
+@use "./3_layout/hero";
+@use "./4_components/links";
