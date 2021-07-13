@@ -1,31 +1,70 @@
-const dom = {
-    nav: document.querySelector(".header__nav"),
-    toggle: document.querySelector(".header__toggle"),
-}
-
-const f = {
-    toggleState(element, className, classStateNew = "active", classStateOld) {
-        if (!classStateOld) {
-            element.classList.toggle(`${className}--${classStateNew}`)
+class Element {
+    constructor(selector, index) {
+        if (index) {
+            this.ref = document.querySelector("." + selector + "--" + index);
         } else {
-            element.classList.replace(`${className}--${classStateOld}`, `${className}--${classStateNew}`);
+            this.ref = document.querySelector("." + selector);
         }
-    },
-    disable(element, duration) {
-        element.classList.toggle("disabled");
+        this.className = selector;
+        this.index = index;
+    }
+    toggleState(newState = "active", oldState) {
+        if (!oldState) {
+            this.ref.classList.toggle(`${this.className}--${newState}`);
+        } else {
+            this.ref.classList.replace(`${this.className}--${oldState}`, `${this.className}--${newState}`)
+        }
+        return;
+    }
+    removeState(state = "active") {
+        this.ref.classList.remove(`${this.className}--${state}`)
+    }
+    testState(state = "active") {
+        return this.ref.classList.contains(`${this.className}--${state}`);
+    }
+    disable(duration) {
+        this.ref.classList.toggle("disabled");
         setTimeout(() => {
-            element.classList.toggle("disabled");
+            this.ref.classList.toggle("disabled");
         }, duration);
+        return;
+    }
+    clickListen(f) {
+        return this.ref.addEventListener("click", () => {
+            return f();
+        });
     }
 }
 
-dom.toggle.addEventListener("click", () => {
-    f.toggleState(dom.toggle, "header__toggle");
-    f.disable(dom.toggle, 1000);
-    if (dom.toggle.classList.contains("header__toggle--active")) {
-        f.toggleState(dom.nav, "header__nav");
+const dom = {
+    nav: new Element("header__nav"),
+    toggle: new Element("header__toggle"),
+    options: []
+}
+
+for (i = 1; i <= document.querySelectorAll(".about__option").length; i++) {
+    dom.options.push(new Element("about__option", i));
+}
+
+dom.toggle.clickListen(function() {
+    const self = dom.toggle;
+    self.toggleState();
+    self.disable(1000);
+    if (self.testState()) {
+        dom.nav.toggleState();
     } else {
-        f.toggleState(dom.nav, "header__nav", "exit", "active");
-        setTimeout(() => f.toggleState(dom.nav, "header__nav", "exit"), 1000);
+        dom.nav.toggleState("exit", "active");
+        setTimeout(() => dom.nav.toggleState("exit"), 1000);
     }
 });
+
+dom.options.forEach(option => option.clickListen(function() {
+    dom.options.forEach(option => option.removeState());
+    option.toggleState();
+}))
+
+// dom.options.forEach(o => o.addEventListener("click", () => {
+//     const currentOption = document.querySelector(".about__option--active");
+//     f.toggleState(currentOption, "about__option");
+//     f.toggleState(o, "about__option");
+// }));
