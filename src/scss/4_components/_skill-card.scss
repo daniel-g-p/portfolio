@@ -1,8 +1,8 @@
 @use "../1_abstracts/" as *;
 .skill {
     position: relative;
-    width: 8rem;
-    height: 8rem;
+    width: 7rem;
+    height: 7rem;
     color: $color-blue-dark;
     &:hover>&__side {
         &--front {
@@ -42,6 +42,7 @@
         transform: rotateZ(-45deg);
     }
     &__name {
+        font-size: 0.8rem;
         text-align: center;
         line-height: 1.5;
         text-transform: uppercase;
