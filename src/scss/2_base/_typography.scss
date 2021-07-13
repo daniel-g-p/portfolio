@@ -35,8 +35,11 @@
 }
 
 .heading-3 {
-    font: 700 1rem/1.25 "Montserrat", sans-serif;
+    font: 700 1rem/1.5 "Montserrat", sans-serif;
     text-transform: uppercase;
+    @include responsive($screen-l) {
+        font-size: 1.25rem;
+    }
 }
 
 .paragraph {

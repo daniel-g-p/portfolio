@@ -4,7 +4,7 @@
     z-index: 1;
     grid-column: content-start / content-end;
     grid-row: 1 / 2;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     @include flexbox(row, space-between);
     &__logo {
         opacity: 0.75;
@@ -23,12 +23,12 @@
         left: 0;
         z-index: 3;
         width: 100vw;
-        height: calc(100vh + 10vw);
-        clip-path: polygon(0% 0%, 50% 5vw, 100% 0%, 100% calc(100vh + 5vw), 50% 100%, 0% calc(100vh + 5vw));
+        height: calc(100vh + 15vw);
+        clip-path: polygon(0% 0%, 50% 7.5vw, 100% 0%, 100% calc(100vh + 7.5vw), 50% 100%, 0% calc(100vh + 7.5vw));
         background-image: linear-gradient(to right bottom, $color-green, $color-blue);
         @include flexbox();
         &--active {
-            top: -5vw;
+            top: -7.5vw;
             transition: top 0.75s ease;
             .header__link-container {
                 opacity: 1;
@@ -79,6 +79,23 @@
         opacity: 0.75;
         transition: opacity 0.25s ease;
         &--active {
+            position: fixed;
+            right: 1.5rem;
+            @include responsive($screen-xs) {
+                right: 2rem;
+            }
+            @include responsive($screen-s) {
+                right: 3rem;
+            }
+            @include responsive($screen-m) {
+                right: 5rem;
+            }
+            @include responsive($screen-l) {
+                right: 10%;
+            }
+            @include responsive($screen-xl) {
+                right: 12.5%;
+            }
             .header__toggle-bar {
                 &--1 {
                     top: 50%;

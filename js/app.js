@@ -37,17 +37,25 @@ class Element {
 }
 
 const dom = {
+    container: new Element("container"),
     nav: new Element("header__nav"),
     toggle: new Element("header__toggle"),
-    options: []
+    aboutOptions: [],
+    aboutContent: []
+}
+
+const states = {
+    about: 0
 }
 
 for (i = 1; i <= document.querySelectorAll(".about__option").length; i++) {
-    dom.options.push(new Element("about__option", i));
+    dom.aboutOptions.push(new Element("about__option", i));
+    dom.aboutContent.push(new Element("about__content", i));
 }
 
 dom.toggle.clickListen(function() {
     const self = dom.toggle;
+    dom.container.toggleState("fixed");
     self.toggleState();
     self.disable(1000);
     if (self.testState()) {
@@ -58,9 +66,20 @@ dom.toggle.clickListen(function() {
     }
 });
 
-dom.options.forEach(option => option.clickListen(function() {
-    dom.options.forEach(option => option.removeState());
-    option.toggleState();
+dom.aboutOptions.forEach(option => option.clickListen(function() {
+    const oldOption = dom.aboutOptions[states.about];
+    const oldContent = dom.aboutContent[states.about];
+    states.about = option.index - 1;
+    const newOption = option;
+    const newContent = dom.aboutContent[states.about];
+    oldOption.toggleState();
+    oldContent.toggleState("exit", "active");
+    newOption.toggleState();
+    newContent.toggleState();
+    setTimeout(() => oldContent.toggleState("exit"), 750);
+    // option.toggleState();
+    // dom.aboutContent[states.about].toggleState();
+
 }))
 
 // dom.options.forEach(o => o.addEventListener("click", () => {

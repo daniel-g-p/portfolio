@@ -1,7 +1,9 @@
 @use "../1_abstracts/" as *;
 .heading-box {
+    width: 100%;
     display: grid;
     column-gap: 1rem;
+    justify-content: stretch;
     align-items: center;
     &--left {
         grid-template-columns: max-content 1fr;
