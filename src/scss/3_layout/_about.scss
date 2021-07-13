@@ -6,9 +6,6 @@
     @include responsive($screen-l) {
         padding: 6rem 0;
     }
-    &__title {
-        margin-bottom: 3rem;
-    }
     &__container {
         @include responsive($screen-l) {
             @include flexbox(row, space-between, center);
@@ -20,13 +17,16 @@
         display: grid;
         grid-template-columns: 6rem 6rem;
         grid-template-rows: 6rem 6rem;
-        margin: 0 auto 3rem;
+        margin: 3rem auto;
         max-width: 24rem;
         @include responsive($screen-l) {
             flex: 0 0 50%;
-            margin: 0 3rem 0 0;
+            margin-left: 0;
+            margin-right: 3rem;
         }
-        @include responsive($screen-l) {
+        @include responsive($screen-xl) {
+            flex: 0 0 50%;
+            margin-left: 0;
             margin-right: 4.5rem;
         }
         @media (min-width: 22.5rem) {
@@ -178,6 +178,7 @@
         top: 0;
         color: $color-blue-dark;
         text-align: center;
+        pointer-events: none;
         @include responsive($screen-l) {
             top: 50%;
             transform: translateY(-50%);
@@ -194,6 +195,7 @@
             transition: all 0.25s ease-out 0.125s;
         }
         &--active {
+            pointer-events: all;
             position: relative;
             transform: none;
             * {

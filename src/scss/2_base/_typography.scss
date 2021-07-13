@@ -20,6 +20,11 @@
     font-style: normal;
 }
 
+::selection {
+    background-color: $color-blue-dark;
+    color: $color-white;
+}
+
 .heading-1 {
     font: 400 3.25rem/1.25 "Squada One", sans-serif;
     @include responsive($screen-l) {
