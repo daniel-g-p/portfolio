@@ -5,6 +5,7 @@
     grid-column: content-start / content-end;
     grid-row: 1 / 2;
     padding: 1.5rem 0;
+    color: $color-white;
     @include flexbox(row, space-between);
     &__logo {
         opacity: 0.75;

@@ -8,6 +8,7 @@
         text-transform: uppercase;
         text-decoration: none;
         transition: transform 0.25s ease;
+        color: currentColor;
         &::before,
         &::after {
             position: absolute;
@@ -41,7 +42,6 @@
     &--nav {
         &:hover,
         &:focus {
-            color: $color-white;
             transform: scale(1.1);
         }
     }
