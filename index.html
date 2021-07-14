@@ -18,11 +18,11 @@
             <a href="/" class="header__logo"><img src="img/logo.svg" alt="Logo"></a>
             <nav class="header__nav">
                 <div class="header__link-container">
-                    <a href="/" class="header__link link">About Me</a>
-                    <a href="/" class="header__link link">My Skills</a>
-                    <a href="/" class="header__link link">My Work</a>
-                    <a href="/" class="header__link link">Contact</a>
-                    <a href="/" class="header__link link">Blog</a>
+                    <a href="/" class="header__link link link--nav">About Me</a>
+                    <a href="/" class="header__link link link--nav">My Skills</a>
+                    <a href="/" class="header__link link link--nav">My Work</a>
+                    <a href="/" class="header__link link link--nav">Contact</a>
+                    <a href="/" class="header__link link link--nav">Blog</a>
                     <div class="header__social">
                         <a href="/" class="header__icon link--icon">
                             <img src="img/icon-github.svg" alt="GitHub">
@@ -95,12 +95,12 @@
                         </p>
                     </div>
                     <div class="about__content about__content--3">
-                        <h3 class="about__heading heading-3">What I work on</h3>
+                        <h3 class="about__heading heading-3">What I do</h3>
                         <p class="about__text paragraph">While I primarily run my work as a web developer in freelance fashion, I also have valuable professional experience working in fast-paced startup environments under my belt.
                         </p>
                     </div>
                     <div class="about__content about__content--4">
-                        <h3 class="about__heading heading-3">How I learn</h3>
+                        <h3 class="about__heading heading-3">What I know</h3>
                         <p class="about__text paragraph">As a web developer, I am entirely self-taught after diving into the field at the start of 2021, all while maintaining my double degree studies in global business and international management.
                         </p>
                     </div>
@@ -126,7 +126,7 @@
                 <div class="skill">
                     <div class="skill__side skill__side--front">
                         <svg class="skill__icon">
-                            <use href="img/sprite.svg#icon-html"></use>
+                            <use href="img/sprite.svg#icon-css"></use>
                         </svg>
                     </div>
                     <div class="skill__side skill__side--back">
@@ -136,7 +136,7 @@
                 <div class="skill">
                     <div class="skill__side skill__side--front">
                         <svg class="skill__icon">
-                            <use href="img/sprite.svg#icon-html"></use>
+                            <use href="img/sprite.svg#icon-js"></use>
                         </svg>
                     </div>
                     <div class="skill__side skill__side--back">
@@ -146,7 +146,7 @@
                 <div class="skill">
                     <div class="skill__side skill__side--front">
                         <svg class="skill__icon">
-                            <use href="img/sprite.svg#icon-html"></use>
+                            <use href="img/sprite.svg#icon-node"></use>
                         </svg>
                     </div>
                     <div class="skill__side skill__side--back">
@@ -156,7 +156,7 @@
                 <div class="skill">
                     <div class="skill__side skill__side--front">
                         <svg class="skill__icon">
-                            <use href="img/sprite.svg#icon-html"></use>
+                            <use href="img/sprite.svg#icon-express"></use>
                         </svg>
                     </div>
                     <div class="skill__side skill__side--back">
@@ -166,7 +166,7 @@
                 <div class="skill">
                     <div class="skill__side skill__side--front">
                         <svg class="skill__icon">
-                            <use href="img/sprite.svg#icon-html"></use>
+                            <use href="img/sprite.svg#icon-mongo"></use>
                         </svg>
                     </div>
                     <div class="skill__side skill__side--back">
@@ -176,7 +176,7 @@
                 <div class="skill">
                     <div class="skill__side skill__side--front">
                         <svg class="skill__icon">
-                            <use href="img/sprite.svg#icon-html"></use>
+                            <use href="img/sprite.svg#icon-react"></use>
                         </svg>
                     </div>
                     <div class="skill__side skill__side--back">
@@ -186,7 +186,7 @@
                 <div class="skill">
                     <div class="skill__side skill__side--front">
                         <svg class="skill__icon">
-                            <use href="img/sprite.svg#icon-html"></use>
+                            <use href="img/sprite.svg#icon-git"></use>
                         </svg>
                     </div>
                     <div class="skill__side skill__side--back">
@@ -196,7 +196,7 @@
                 <div class="skill">
                     <div class="skill__side skill__side--front">
                         <svg class="skill__icon">
-                            <use href="img/sprite.svg#icon-html"></use>
+                            <use href="img/sprite.svg#icon-github"></use>
                         </svg>
                     </div>
                     <div class="skill__side skill__side--back">
@@ -206,7 +206,7 @@
                 <div class="skill">
                     <div class="skill__side skill__side--front">
                         <svg class="skill__icon">
-                            <use href="img/sprite.svg#icon-html"></use>
+                            <use href="img/sprite.svg#icon-sass"></use>
                         </svg>
                     </div>
                     <div class="skill__side skill__side--back">
@@ -216,7 +216,7 @@
                 <div class="skill">
                     <div class="skill__side skill__side--front">
                         <svg class="skill__icon">
-                            <use href="img/sprite.svg#icon-html"></use>
+                            <use href="img/sprite.svg#icon-figma"></use>
                         </svg>
                     </div>
                     <div class="skill__side skill__side--back">
@@ -226,7 +226,7 @@
                 <div class="skill">
                     <div class="skill__side skill__side--front">
                         <svg class="skill__icon">
-                            <use href="img/sprite.svg#icon-html"></use>
+                            <use href="img/sprite.svg#icon-ai"></use>
                         </svg>
                     </div>
                     <div class="skill__side skill__side--back">
@@ -235,8 +235,70 @@
                 </div>
             </div>
         </section>
-    </div>
-    <script src="js/app.js"></script>
+        <section class="work">
+            <div class="work__title heading-box heading-box--left">
+                <h2 class="heading-box__text heading-2">My Work</h2>
+                <div class="heading-box__line"></div>
+            </div>
+            <div class="work__projects">
+                <div class="project project--1">
+                    <div class="project__box">
+                        <h3 class="project__title heading-3">GaliGo</h3>
+                        <div class="project__content project__content--1" style="max-height: 0">
+                            <p class="project__text paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid et ea minus earum quo voluptate illo doloremque labore error explicabo dolore dolorem sit eos, a incidunt laborum aspernatur quam sequi.</p>
+                            <p class="project__text paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid et ea minus earum quo voluptate illo doloremque labore error explicabo dolore dolorem sit eos, a incidunt laborum aspernatur quam sequi.</p>
+                            <a href="/" class="project__link link">Go to site</a>
+                            <a href="/" class="project__link link">View on GitHub</a>
+                        </div>
+                    </div>
+                    <div class="project__close project__close--1">
+                        <div class="project__close-bar project__close-bar--1"></div>
+                        <div class="project__close-bar project__close-bar--2"></div>
+                    </div>
+                    <div class="project__background">
+                        <img src="img/bg-galigo.jpg" alt="Background">
+                    </div>
+                </div>
+                <div class="project project--2">
+                    <div class="project__box">
+                        <h3 class="project__title heading-3">GaliGo</h3>
+                        <div class="project__content project__content--2" style="max-height: 0">
+                            <p class="project__text paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid et ea minus earum quo voluptate illo doloremque labore error explicabo dolore dolorem sit eos, a incidunt laborum aspernatur quam sequi.</p>
+                            <p class="project__text paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid et ea minus earum quo voluptate illo doloremque labore error explicabo dolore dolorem sit eos, a incidunt laborum aspernatur quam sequi.</p>
+                            <a href="/" class="project__link link">Go to site</a>
+                            <a href="/" class="project__link link">View on GitHub</a>
+                        </div>
+                    </div>
+                    <div class="project__close project__close--2">
+                        <div class="project__close-bar project__close-bar--1"></div>
+                        <div class="project__close-bar project__close-bar--2"></div>
+                    </div>
+                    <div class="project__background">
+                        <img src="img/bg-galigo.jpg" alt="Background">
+                    </div>
+                </div>
+                <div class="project project--3">
+                    <div class="project__box">
+                        <h3 class="project__title heading-3">GaliGo</h3>
+                        <div class="project__content project__content--3" style="max-height: 0">
+                            <p class="project__text paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid et ea minus earum quo voluptate illo doloremque labore error explicabo dolore dolorem sit eos, a incidunt laborum aspernatur quam sequi.</p>
+                            <p class="project__text paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid et ea minus earum quo voluptate illo doloremque labore error explicabo dolore dolorem sit eos, a incidunt laborum aspernatur quam sequi.</p>
+                            <a href="/" class="project__link link">Go to site</a>
+                            <a href="/" class="project__link link">View on GitHub</a>
+                        </div>
+                    </div>
+                    <div class="project__close project__close--3">
+                        <div class="project__close-bar project__close-bar--1"></div>
+                        <div class="project__close-bar project__close-bar--2"></div>
+                    </div>
+                    <div class="project__background">
+                        <img src="img/bg-galigo.jpg" alt="Background">
+                    </div>
+                </div>
+                <img src="img/logo-white.svg" alt="Logo" class="logo">
+        </section>
+        </div>
+        <script src="js/app.js"></script>
 </body>
 
 </html>

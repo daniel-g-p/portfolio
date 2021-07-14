@@ -30,9 +30,16 @@ class Element {
         return;
     }
     clickListen(f) {
-        return this.ref.addEventListener("click", () => {
+        return this.ref.addEventListener("click", (event) => {
             return f();
         });
+    }
+    adjustMaxHeight(boolean) {
+        if (boolean) {
+            this.ref.style.maxHeight = this.ref.scrollHeight + "px";
+        } else {
+            this.ref.style.maxHeight = 0;
+        }
     }
 }
 
@@ -41,11 +48,15 @@ const dom = {
     nav: new Element("header__nav"),
     toggle: new Element("header__toggle"),
     aboutOptions: [],
-    aboutContent: []
+    aboutContent: [],
+    projects: [],
+    projectsContent: [],
+    projectsClose: []
 }
 
 const states = {
-    about: 0
+    about: 0,
+    projects: 0
 }
 
 const functions = {
@@ -53,6 +64,11 @@ const functions = {
         for (i = 1; i <= document.querySelectorAll(".about__option").length; i++) {
             dom.aboutOptions.push(new Element("about__option", i));
             dom.aboutContent.push(new Element("about__content", i));
+        }
+        for (i = 1; i <= document.querySelectorAll(".project").length; i++) {
+            dom.projects.push(new Element("project", i));
+            dom.projectsContent.push(new Element("project__content", i));
+            dom.projectsClose.push(new Element("project__close", i));
         }
     },
     enableNavigation() {
@@ -82,23 +98,43 @@ const functions = {
         setTimeout(() => oldContent.toggleState("exit"), 750);
     },
     enableAbout() {
-        dom.aboutOptions.forEach(option => option.clickListen(function() {
-            clearInterval(aboutInterval);
-            functions.changeAbout(option, option.index - 1);
-        }));
-    },
-    repeatAbout() {
-        return setInterval(() => {
+        const aboutInterval = setInterval(() => {
             let newIndex = states.about + 1;
             if (newIndex >= dom.aboutOptions.length) {
                 newIndex = 0;
             }
             functions.changeAbout(dom.aboutOptions[newIndex], newIndex);
         }, 7500);
+        dom.aboutOptions.forEach(option => option.clickListen(() => {
+            clearInterval(aboutInterval);
+            functions.changeAbout(option, option.index - 1);
+        }));
+    },
+    enableProjects() {
+        dom.projects.forEach(p => p.clickListen(() => {
+            if (!p.testState()) {
+                const oldProject = dom.projects[states.projects];
+                const oldContent = dom.projectsContent[states.projects];
+                states.projects = p.index - 1;
+                const newProject = p;
+                const newContent = dom.projectsContent[states.projects];
+                if (oldProject.testState()) {
+                    oldProject.toggleState();
+                    oldContent.adjustMaxHeight(false);
+                }
+                newProject.toggleState();
+                newContent.adjustMaxHeight(true);
+            }
+        }));
+        dom.projectsClose.forEach(p => p.clickListen(() => {
+            event.stopPropagation();
+            dom.projects[p.index - 1].toggleState();
+            dom.projectsContent[p.index - 1].adjustMaxHeight(false);
+        }));
     }
 }
 
 functions.fillArrays();
 functions.enableNavigation();
-const aboutInterval = functions.repeatAbout();
 functions.enableAbout();
+functions.enableProjects();

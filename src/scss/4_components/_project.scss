@@ -1,0 +1,129 @@
+@use "../1_abstracts/" as *;
+.project {
+    position: relative;
+    border: 0.2rem solid $color-white;
+    cursor: pointer;
+    transition: padding 0.25s ease, border-color 0.25s ease;
+    overflow: hidden;
+    &:not(:last-child) {
+        margin-bottom: 1.5rem;
+    }
+    &:hover {
+        padding-left: 0.75rem;
+        transition: padding 0.25s ease 0.25s, border-color 0.25s ease;
+        border-color: $color-green;
+        &::before {
+            height: 100%;
+            width: 0.75rem;
+            background-color: $color-green;
+            transition: height 0.25s ease, width 0.25s ease 0.25s, background-color 0.25s ease;
+        }
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0.25rem;
+        height: 0;
+        backface-visibility: hidden;
+        background-color: $color-white;
+        transition: height 0.25s ease 0.25s, width 0.25s ease, background-color 0.25s ease;
+    }
+    &__title {
+        padding-right: 2rem;
+    }
+    &__background {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        width: 75%;
+        transform: translateY(-50%);
+        img {
+            display: block;
+            width: 100%;
+        }
+        &::before,
+        &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        &::before {
+            background-image: linear-gradient(to bottom, rgba($color-blue-dark, 0), $color-blue-dark);
+        }
+        &::after {
+            background-image: linear-gradient(to left, rgba($color-blue-dark, 0), $color-blue-dark);
+        }
+    }
+    &__box {
+        padding: 1rem;
+    }
+    &__content {
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 1s ease, opacity 0.5s ease 0.25s;
+    }
+    &__text {
+        font-size: 0.8rem;
+        margin: 0.5rem 0;
+    }
+    &__link {
+        color: $color-white;
+        font-size: 0.8rem;
+        display: inline-block;
+        margin-bottom: 0.5rem;
+        &:not(:last-child) {
+            margin-right: 1rem;
+        }
+    }
+    &__close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        @include flexbox(column, space-between);
+        width: 1rem;
+        height: 1rem;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+        pointer-events: none;
+    }
+    &__close-bar {
+        display: block;
+        width: 100%;
+        height: 0.1rem;
+        background-color: $color-white;
+        &--1 {
+            transform: translateY(0.45rem) rotate(45deg);
+        }
+        &--2 {
+            transform: translateY(-0.45rem) rotate(-45deg);
+        }
+    }
+    &--active {
+        border-color: $color-green;
+        padding-left: 0.75rem;
+        &::before {
+            height: 100%;
+            width: 0.75rem;
+            background-color: $color-green;
+        }
+        .project__close {
+            pointer-events: all;
+            opacity: 0.5;
+            &:hover {
+                opacity: 1;
+            }
+        }
+        .project__content {
+            opacity: 1;
+        }
+    }
+}

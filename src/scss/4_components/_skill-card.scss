@@ -30,7 +30,6 @@
             top: 0;
             left: 0;
             background-color: $color-green;
-            // box-shadow: 0 0 1rem $color-green;
         }
     }
     &__icon {
@@ -48,5 +47,6 @@
         text-transform: uppercase;
         font-weight: 700;
         transform: rotateZ(-45deg);
+        pointer-events: none;
     }
 }

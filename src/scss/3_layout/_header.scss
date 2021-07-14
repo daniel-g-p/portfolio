@@ -65,6 +65,7 @@
         opacity: 0.75;
         transition: transform 0.25s ease, opacity 0.25s ease;
         &:hover {
+            outline: none;
             transform: scale(1.1);
             opacity: 1;
         }
