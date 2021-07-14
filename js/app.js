@@ -16,6 +16,9 @@ class Element {
         }
         return;
     }
+    addState(state = "active") {
+        this.ref.classList.add(`${this.className}--${state}`)
+    }
     removeState(state = "active") {
         this.ref.classList.remove(`${this.className}--${state}`)
     }
@@ -29,18 +32,16 @@ class Element {
         }, duration);
         return;
     }
-    clickListen(f) {
-        return this.ref.addEventListener("click", (event) => {
+    clickListen(f, e = "click") {
+        return this.ref.addEventListener(e, (event) => {
             return f();
         });
     }
     adjustMaxHeight(boolean) {
         if (boolean) {
             this.ref.style.maxHeight = this.ref.scrollHeight + "px";
-            console.log("max", this.ref.scrollHeight);
         } else {
             this.ref.style.maxHeight = 0;
-            console.log("0", this.ref.scrollHeight);
         }
     }
 }
@@ -49,11 +50,17 @@ const dom = {
     container: new Element("container"),
     nav: new Element("header__nav"),
     toggle: new Element("header__toggle"),
+    form: new Element("contact__form"),
+    name: new Element("name"),
+    email: new Element("email"),
+    subject: new Element("subject"),
+    message: new Element("message"),
     aboutOptions: [],
     aboutContent: [],
     projects: [],
     projectsContent: [],
-    projectsClose: []
+    projectsClose: [],
+    inputGroups: [],
 }
 
 const states = {
@@ -128,6 +135,28 @@ const functions = {
             event.stopPropagation();
             dom.projects[p.index - 1].toggleState();
         }));
+    },
+    enableForm() {
+        const checkInputs = [dom.name, dom.email, dom.subject, dom.message];
+        dom.form.clickListen(() => {
+            const valid = this.checkForm(checkInputs);
+            valid ? console.log("error") : event.preventDefault();
+        }, "submit");
+        checkInputs.forEach(i => i.clickListen(() => {
+            i.removeState("error");
+        }, "input"))
+    },
+    checkForm(arr) {
+        const checkInputs = arr;
+        for (let item of checkInputs) {
+            if (!item.ref.value) {
+                item.addState("error")
+            }
+            if (!dom.email.ref.value.match(/\S+@\S+\.\S+/) && !dom.email.testState("error")) {
+                dom.email.addState("error");
+            }
+        };
+        return !checkInputs.some((item) => item.testState("error"));
     }
 }
 
@@ -135,3 +164,4 @@ functions.fillArrays();
 functions.enableNavigation();
 functions.enableAbout();
 functions.enableProjects();
+functions.enableForm();

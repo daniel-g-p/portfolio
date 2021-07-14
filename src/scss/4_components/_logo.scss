@@ -1,0 +1,11 @@
+@use "../1_abstracts/" as *;
+.logo {
+    position: absolute;
+    left: 0;
+    bottom: -25%;
+    height: 100%;
+    max-width: 75%;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: -1;
+}

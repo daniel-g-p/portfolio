@@ -5,24 +5,24 @@
     grid-column: page-start / page-end;
     grid-row: 5 / 6;
     background-color: $color-blue-dark;
-    padding: 1rem 1.5rem calc(4.5rem + 7.5vw);
+    padding: 1rem 1.5rem calc(9rem + 7.5vw);
     clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 7.5vw), 50% 100%, 0% calc(100% - 7.5vw));
-    margin: -1rem 0 10rem;
+    margin: -1rem 0 0;
     color: $color-white;
     @include responsive($screen-xs) {
-        padding: 1rem 2rem calc(4.5rem + 7.5vw);
+        padding: 1rem 2rem calc(9rem + 7.5vw);
     }
     @include responsive($screen-s) {
-        padding: 1rem 3rem calc(4.5rem + 7.5vw);
+        padding: 1rem 3rem calc(9rem + 7.5vw);
     }
     @include responsive($screen-m) {
-        padding: 1rem 5rem calc(6rem + 7.5vw);
+        padding: 1rem 5rem calc(10.5rem + 7.5vw);
     }
     @include responsive($screen-l) {
-        padding: 1rem 10% calc(6rem + 7.5vw);
+        padding: 1rem 10% calc(10.5rem + 7.5vw);
     }
     @include responsive($screen-xl) {
-        padding: 1rem 12.5% calc(6rem + 7.5vw);
+        padding: 1rem 12.5% calc(10.5rem + 7.5vw);
     }
     &__title {
         margin-bottom: 3rem;

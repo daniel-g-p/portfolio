@@ -1,0 +1,101 @@
+@use "../1_abstracts/" as *;
+.contact {
+    position: relative;
+    z-index: 2;
+    grid-column: content-start / content-end;
+    grid-row: 6 / 7;
+    background-color: $color-white;
+    margin: calc(-4.5rem - 7.5vw) 0 4.5rem;
+    margin-top: calc(-4.5rem - 7.5vw);
+    box-shadow: 0 0.5rem 1.5rem rgba($color-blue-dark, 0.5);
+    padding: 1rem;
+    color: $color-blue-dark;
+    @include responsive($screen-xs) {
+        padding: 1.5rem;
+    }
+    @include responsive($screen-s) {
+        padding: 3rem;
+    }
+    &__title {
+        margin-bottom: 0.5rem;
+    }
+    &__text {
+        margin-bottom: 1.5rem;
+        @include responsive($screen-s) {
+            margin-bottom: 3rem;
+        }
+    }
+    &__form {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-auto-rows: max-content;
+        gap: 1rem 1rem;
+    }
+    &__field {
+        &--name {
+            grid-column: 1 / -1;
+        }
+        &--email {
+            grid-column: 1 / -1;
+        }
+        &--organization {
+            grid-column: 1 / -1;
+        }
+        &--language {
+            display: none;
+            grid-column: 1 / -1;
+        }
+        &--subject {
+            grid-column: 1 / -1;
+        }
+        &--message {
+            display: none;
+            grid-column: 1 / -1;
+        }
+        @include responsive($screen-m) {
+            &--name {
+                grid-column: 1 / 5;
+            }
+            &--email {
+                grid-column: 5 / -1;
+            }
+            &--organization {
+                grid-column: 1 / 6;
+            }
+            &--language {
+                display: none;
+                grid-column: 6 / -1;
+            }
+            &--subject {
+                grid-column: 1 / -1;
+            }
+            &--message {
+                display: none;
+                grid-column: 1 / -1;
+            }
+        }
+    }
+    &__button {
+        position: relative;
+        z-index: 1;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        grid-column: 1 / -1;
+        outline: none;
+        padding: 0.75em;
+        border: none;
+        color: $color-white;
+        background-image: linear-gradient(to right, $color-green, $color-blue);
+        background-size: 125%;
+        background-position: right;
+        cursor: pointer;
+        transition: background-position 0.5s ease;
+        &:hover,
+        &:focus {
+            background-position: left;
+        }
+    }
+}

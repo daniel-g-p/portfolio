@@ -1,0 +1,92 @@
+@use "../1_abstracts/" as *;
+.input-group {
+    position: relative;
+    @include flexbox(row);
+    &__label {
+        position: absolute;
+        left: 1.5em;
+        top: -0.25em;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: $color-blue;
+        background-color: $color-white;
+        padding: 0 0.75em;
+        cursor: pointer;
+    }
+    &__input {
+        width: 100%;
+        font-size: 1rem;
+        font-family: "Montserrat", sans-serif;
+        letter-spacing: 0.1em;
+        outline: none;
+        padding: 0.75em;
+        border: 0.2rem solid rgba($color-blue-dark, 0.05);
+        transition: border-color 0.25s ease;
+        &:hover,
+        &:focus {
+            border-color: $color-green;
+        }
+        &--textarea {
+            resize: none;
+            height: 10em;
+        }
+    }
+    &__option {
+        width: 4rem;
+    }
+    &__error {
+        position: absolute;
+        top: 0.75em;
+        right: 0.75em;
+        width: 1.5rem;
+        height: 1.5rem;
+        fill: $color-red;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+    }
+}
+
+.name,
+.email,
+.subject,
+.message {
+    &--error {
+        border-color: $color-red;
+        padding-right: 2.5rem;
+        &:hover,
+        &:focus {
+            border-color: $color-red;
+        }
+        &~svg {
+            opacity: 1;
+        }
+        &~label {
+            @keyframes shake-label {
+                0% {
+                    transform: translateX(0);
+                }
+                10% {
+                    transform: translateX(0.25rem);
+                }
+                30% {
+                    transform: translateX(-0.25rem);
+                }
+                50% {
+                    transform: translateX(0.25rem);
+                }
+                70% {
+                    transform: translateX(-0.25rem);
+                }
+                90% {
+                    transform: translateX(0.25rem);
+                }
+                100% {
+                    transform: translateX(0);
+                }
+            }
+            animation: shake-label 0.5s ease-in-out;
+        }
+    }
+}

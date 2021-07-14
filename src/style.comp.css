@@ -63,7 +63,7 @@
 
 html {
   font: 400 125%/1 "Montserrat", sans-serif;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
 }
 
 body {
@@ -662,39 +662,143 @@ body {
   grid-column: page-start/page-end;
   grid-row: 5/6;
   background-color: #00001A;
-  padding: 1rem 1.5rem calc(4.5rem + 7.5vw);
+  padding: 1rem 1.5rem calc(9rem + 7.5vw);
   clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 7.5vw), 50% 100%, 0% calc(100% - 7.5vw));
-  margin: -1rem 0 10rem;
+  margin: -1rem 0 0;
   color: #FFFFFF;
 }
 @media (min-width: 25rem) {
   .work {
-    padding: 1rem 2rem calc(4.5rem + 7.5vw);
+    padding: 1rem 2rem calc(9rem + 7.5vw);
   }
 }
 @media (min-width: 37.5rem) {
   .work {
-    padding: 1rem 3rem calc(4.5rem + 7.5vw);
+    padding: 1rem 3rem calc(9rem + 7.5vw);
   }
 }
 @media (min-width: 50rem) {
   .work {
-    padding: 1rem 5rem calc(6rem + 7.5vw);
+    padding: 1rem 5rem calc(10.5rem + 7.5vw);
   }
 }
 @media (min-width: 62.5rem) {
   .work {
-    padding: 1rem 10% calc(6rem + 7.5vw);
+    padding: 1rem 10% calc(10.5rem + 7.5vw);
   }
 }
 @media (min-width: 75rem) {
   .work {
-    padding: 1rem 12.5% calc(6rem + 7.5vw);
+    padding: 1rem 12.5% calc(10.5rem + 7.5vw);
   }
 }
 .work__title {
   margin-bottom: 3rem;
 }
+.contact {
+  position: relative;
+  z-index: 2;
+  grid-column: content-start/content-end;
+  grid-row: 6/7;
+  background-color: #FFFFFF;
+  margin: calc(-4.5rem - 7.5vw) 0 4.5rem;
+  margin-top: calc(-4.5rem - 7.5vw);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 26, 0.5);
+  padding: 1rem;
+  color: #00001A;
+}
+@media (min-width: 25rem) {
+  .contact {
+    padding: 1.5rem;
+  }
+}
+@media (min-width: 37.5rem) {
+  .contact {
+    padding: 3rem;
+  }
+}
+.contact__title {
+  margin-bottom: 0.5rem;
+}
+.contact__text {
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 37.5rem) {
+  .contact__text {
+    margin-bottom: 3rem;
+  }
+}
+.contact__form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-auto-rows: max-content;
+  gap: 1rem 1rem;
+}
+.contact__field--name {
+  grid-column: 1/-1;
+}
+.contact__field--email {
+  grid-column: 1/-1;
+}
+.contact__field--organization {
+  grid-column: 1/-1;
+}
+.contact__field--language {
+  display: none;
+  grid-column: 1/-1;
+}
+.contact__field--subject {
+  grid-column: 1/-1;
+}
+.contact__field--message {
+  display: none;
+  grid-column: 1/-1;
+}
+@media (min-width: 50rem) {
+  .contact__field--name {
+    grid-column: 1/5;
+  }
+  .contact__field--email {
+    grid-column: 5/-1;
+  }
+  .contact__field--organization {
+    grid-column: 1/6;
+  }
+  .contact__field--language {
+    display: none;
+    grid-column: 6/-1;
+  }
+  .contact__field--subject {
+    grid-column: 1/-1;
+  }
+  .contact__field--message {
+    display: none;
+    grid-column: 1/-1;
+  }
+}
+.contact__button {
+  position: relative;
+  z-index: 1;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  grid-column: 1/-1;
+  outline: none;
+  padding: 0.75em;
+  border: none;
+  color: #FFFFFF;
+  background-image: linear-gradient(to right, #78FFD6, #256EFF);
+  background-size: 125%;
+  background-position: right;
+  cursor: pointer;
+  transition: background-position 0.5s ease;
+}
+.contact__button:hover, .contact__button:focus {
+  background-position: left;
+}
+
 .link:link, .link:visited {
   position: relative;
   font-weight: 700;
@@ -802,7 +906,6 @@ body {
   transform: rotateZ(-45deg);
 }
 .skill__name {
-  font-size: 0.8rem;
   text-align: center;
   line-height: 1.5;
   text-transform: uppercase;
@@ -852,7 +955,7 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: -1;
+  z-index: -3;
   width: 75%;
   transform: translateY(-50%);
 }
@@ -878,6 +981,11 @@ body {
 .project__box {
   padding: 1rem;
 }
+@media (min-width: 50rem) {
+  .project__box {
+    padding: 1.5rem;
+  }
+}
 .project__content {
   height: 0;
   opacity: 0;
@@ -891,8 +999,13 @@ body {
   display: none;
 }
 .project__text {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   margin-bottom: 0.5rem;
+}
+@media (min-width: 50rem) {
+  .project__text {
+    font-size: 1rem;
+  }
 }
 .project__link {
   color: #FFFFFF;
@@ -963,6 +1076,109 @@ body {
   opacity: 0.1;
   pointer-events: none;
   z-index: -1;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.input-group__label {
+  position: absolute;
+  left: 1.5em;
+  top: -0.25em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #256EFF;
+  background-color: #FFFFFF;
+  padding: 0 0.75em;
+  cursor: pointer;
+}
+.input-group__input {
+  width: 100%;
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.1em;
+  outline: none;
+  padding: 0.75em;
+  border: 0.2rem solid rgba(0, 0, 26, 0.05);
+  transition: border-color 0.25s ease;
+}
+.input-group__input:hover, .input-group__input:focus {
+  border-color: #78FFD6;
+}
+.input-group__input--textarea {
+  resize: none;
+  height: 10em;
+}
+.input-group__option {
+  width: 4rem;
+}
+.input-group__error {
+  position: absolute;
+  top: 0.75em;
+  right: 0.75em;
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #FF8080;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.name--error,
+.email--error,
+.subject--error,
+.message--error {
+  border-color: #FF8080;
+  padding-right: 2.5rem;
+}
+.name--error:hover, .name--error:focus,
+.email--error:hover,
+.email--error:focus,
+.subject--error:hover,
+.subject--error:focus,
+.message--error:hover,
+.message--error:focus {
+  border-color: #FF8080;
+}
+.name--error ~ svg,
+.email--error ~ svg,
+.subject--error ~ svg,
+.message--error ~ svg {
+  opacity: 1;
+}
+.name--error ~ label,
+.email--error ~ label,
+.subject--error ~ label,
+.message--error ~ label {
+  animation: shake-label 0.5s ease-in-out;
+}
+@keyframes shake-label {
+  0% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(0.25rem);
+  }
+  30% {
+    transform: translateX(-0.25rem);
+  }
+  50% {
+    transform: translateX(0.25rem);
+  }
+  70% {
+    transform: translateX(-0.25rem);
+  }
+  90% {
+    transform: translateX(0.25rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 /*# sourceMappingURL=style.comp.css.map */

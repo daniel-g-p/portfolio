@@ -240,6 +240,7 @@
                 <h2 class="heading-box__text heading-2">My Work</h2>
                 <div class="heading-box__line"></div>
             </div>
+            <img src="img/logo-white.svg" alt="Logo" class="logo">
             <div class="work__projects">
                 <div class="project project--1">
                     <div class="project__box">
@@ -295,10 +296,68 @@
                         <img src="img/bg-galigo.jpg" alt="Background">
                     </div>
                 </div>
-                <img src="img/logo-white.svg" alt="Logo" class="logo">
+            </div>
         </section>
-        </div>
-        <script src="js/app.js"></script>
+        <section class="contact">
+            <div class="contact__title heading-box heading-box--left">
+                <h2 class="heading-box__text heading-2">Contact</h2>
+                <div class="heading-box__line"></div>
+            </div>
+            <p class="contact__text paragraph">Whether you want to start a new project, learn more about what I do, or just say Hi, feel free to drop me a message and I will come back to you as soon as possible.</p>
+            <form action="/" class="contact__form" novalidate>
+                <div class="contact__field contact__field--name input-group">
+                    <input type="text" name="name" id="name" class="input-group__input name">
+                    <label for="name" class="input-group__label">Name</label>
+                    <svg class="input-group__error">
+                        <use href="img/sprite.svg#icon-error"></use>
+                    </svg>
+                </div>
+                <div class="contact__field contact__field--email input-group">
+                    <input type="email" name="email" id="email" class="input-group__input email">
+                    <label for="email" class="input-group__label">Email</label>
+                    <svg class="input-group__error">
+                        <use href="img/sprite.svg#icon-error"></use>
+                    </svg>
+                </div>
+                <div class="contact__field contact__field--organization input-group">
+                    <label for="organization" class="input-group__label">Organization</label>
+                    <input type="text" name="organization" id="organization" class="input-group__input organization">
+                    <svg class="input-group__error">
+                        <use href="img/sprite.svg#icon-error"></use>
+                    </svg>
+                </div>
+                <div class="contact__field contact__field--language input-group">
+                    <select name="language" id="language" class="input-group__input input-group__input--select language">
+                        <option class="input-group__option" value="english" selected>English</option>
+                        <option class="input-group__option" value="german">Deutsch</option>
+                        <option class="input-group__option" value="spanish">Espa&#241;ol</option>
+                        <option class="input-group__option" value="french">Fran&#231;ais</option>
+                        <option class="input-group__option" value="italian">Italiano</option>
+                    </select>
+                    <label for="language" class="input-group__label">Language</label>
+                    <svg class="input-group__error">
+                        <use href="img/sprite.svg#icon-error"></use>
+                    </svg>
+                </div>
+                <div class="contact__field contact__field--subject input-group">
+                    <input type="text" name="subject" id="subject" class="input-group__input subject">
+                    <label for="subject" class="input-group__label">Subject Line</label>
+                    <svg class="input-group__error">
+                        <use href="img/sprite.svg#icon-error"></use>
+                    </svg>
+                </div>
+                <div class="contact__field contact__field--message input-group">
+                    <textarea type="text" name="message" id="message" class="input-group__input input-group__input--textarea message"></textarea>
+                    <label for="message" class="input-group__label">Message</label>
+                    <svg class="input-group__error">
+                        <use href="img/sprite.svg#icon-error"></use>
+                    </svg>
+                </div>
+                <button class="contact__button">Send</button>
+            </form>
+        </section>
+    </div>
+    <script src="js/app.js"></script>
 </body>
 
 </html>

@@ -7,8 +7,10 @@
 @use "./3_layout/about";
 @use "./3_layout/skills";
 @use "./3_layout/work";
+@use "./3_layout/contact";
 @use "./4_components/links";
 @use "./4_components/heading-box";
 @use "./4_components/skill-card";
 @use "./4_components/project";
-@use "./4_components/logo-mask";
+@use "./4_components/logo";
+@use "./4_components/input";
