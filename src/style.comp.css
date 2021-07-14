@@ -817,6 +817,7 @@ body {
   cursor: pointer;
   transition: padding 0.25s ease, border-color 0.25s ease;
   overflow: hidden;
+  scroll-margin-top: 1.5rem;
 }
 .project:not(:last-child) {
   margin-bottom: 1.5rem;
@@ -828,17 +829,17 @@ body {
 }
 .project:hover::before {
   height: 100%;
-  width: 0.75rem;
+  width: 0.85rem;
   background-color: #78FFD6;
   transition: height 0.25s ease, width 0.25s ease 0.25s, background-color 0.25s ease;
 }
 .project::before {
   content: "";
   position: absolute;
-  left: 0;
+  left: -0.1rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 0.25rem;
+  width: 0.35rem;
   height: 0;
   backface-visibility: hidden;
   background-color: #FFFFFF;
@@ -878,13 +879,20 @@ body {
   padding: 1rem;
 }
 .project__content {
+  height: 0;
   opacity: 0;
+  margin-top: 0;
   overflow: hidden;
-  transition: max-height 1s ease, opacity 0.5s ease 0.25s;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  transition: height 1s ease, opacity 0.5s ease 0.25s, margin-top 0.25s ease;
+}
+.project__content::-webkit-scrollbar {
+  display: none;
 }
 .project__text {
   font-size: 0.8rem;
-  margin: 0.5rem 0;
+  margin-bottom: 0.5rem;
 }
 .project__link {
   color: #FFFFFF;
@@ -928,8 +936,9 @@ body {
 }
 .project--active::before {
   height: 100%;
-  width: 0.75rem;
+  width: 0.85rem;
   background-color: #78FFD6;
+  transition: height 0.25s ease, width 0.25s ease 0.25s, background-color 0.25s ease;
 }
 .project--active .project__close {
   pointer-events: all;
@@ -939,7 +948,10 @@ body {
   opacity: 1;
 }
 .project--active .project__content {
+  margin-top: 0.5rem;
+  overflow-y: scroll;
   opacity: 1;
+  height: 50vh;
 }
 
 .logo {

@@ -37,8 +37,10 @@ class Element {
     adjustMaxHeight(boolean) {
         if (boolean) {
             this.ref.style.maxHeight = this.ref.scrollHeight + "px";
+            console.log("max", this.ref.scrollHeight);
         } else {
             this.ref.style.maxHeight = 0;
+            console.log("0", this.ref.scrollHeight);
         }
     }
 }
@@ -114,22 +116,17 @@ const functions = {
         dom.projects.forEach(p => p.clickListen(() => {
             if (!p.testState()) {
                 const oldProject = dom.projects[states.projects];
-                const oldContent = dom.projectsContent[states.projects];
                 states.projects = p.index - 1;
                 const newProject = p;
-                const newContent = dom.projectsContent[states.projects];
                 if (oldProject.testState()) {
                     oldProject.toggleState();
-                    oldContent.adjustMaxHeight(false);
                 }
                 newProject.toggleState();
-                newContent.adjustMaxHeight(true);
             }
         }));
         dom.projectsClose.forEach(p => p.clickListen(() => {
             event.stopPropagation();
             dom.projects[p.index - 1].toggleState();
-            dom.projectsContent[p.index - 1].adjustMaxHeight(false);
         }));
     }
 }
