@@ -58,7 +58,7 @@
     &__text {
         text-align: center;
         font-size: 0.75rem;
-        opacity: 0.5;
+        color: rgba($color-white, 0.25);
         @include responsive($screen-m) {
             margin-top: 0.5rem;
             text-align: left;

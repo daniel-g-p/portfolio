@@ -132,7 +132,7 @@ body {
   position: fixed;
   top: calc(-100vh - 20vw);
   left: 0;
-  z-index: 3;
+  z-index: 5;
   width: 100vw;
   height: calc(100vh + 15vw);
   clip-path: polygon(0% 0%, 50% 7.5vw, 100% 0%, 100% calc(100vh + 7.5vw), 50% 100%, 0% calc(100vh + 7.5vw));
@@ -478,10 +478,10 @@ body {
   transform: translate(5%, -5%) scale(0.9);
 }
 .about__option--active.about__option--3 {
-  transform: translate(-5%, 5%) scale(0.9);
+  transform: translate(5%, 5%) scale(0.9);
 }
 .about__option--active.about__option--4 {
-  transform: translate(5%, 5%) scale(0.9);
+  transform: translate(-5%, 5%) scale(0.9);
 }
 .about__option--1 {
   grid-column: 1/2;
@@ -510,19 +510,6 @@ body {
   right: 2.78%;
 }
 .about__option--3 {
-  grid-column: 1/2;
-  grid-row: 2/3;
-  justify-self: start;
-  align-self: end;
-  clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
-  transform-origin: bottom left;
-}
-.about__option--3::after {
-  clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
-  bottom: 2.78%;
-  left: 2.78%;
-}
-.about__option--4 {
   grid-column: 2/3;
   grid-row: 2/3;
   justify-self: end;
@@ -530,10 +517,23 @@ body {
   clip-path: polygon(0% 100%, 100% 100%, 100% 0%);
   transform-origin: bottom right;
 }
-.about__option--4::after {
+.about__option--3::after {
   clip-path: polygon(0% 100%, 100% 100%, 100% 0%);
   bottom: 2.78%;
   right: 2.78%;
+}
+.about__option--4 {
+  grid-column: 1/2;
+  grid-row: 2/3;
+  justify-self: start;
+  align-self: end;
+  clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+  transform-origin: bottom left;
+}
+.about__option--4::after {
+  clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+  bottom: 2.78%;
+  left: 2.78%;
 }
 .about__icon {
   max-height: 33%;
@@ -549,10 +549,10 @@ body {
   transform: translate(67%, -67%);
 }
 .about__icon--3 {
-  transform: translate(-67%, 67%);
+  transform: translate(67%, 67%);
 }
 .about__icon--4 {
-  transform: translate(67%, 67%);
+  transform: translate(-67%, 67%);
 }
 .about__content-box {
   display: flex;
@@ -616,32 +616,33 @@ body {
   grid-column: page-start/page-end;
   grid-row: 4/5;
   background-color: #00001A;
-  padding: calc(4.5rem + 7.5vw) 1.5rem 4.5rem;
+  padding: calc(4.5rem + 7.5vw) 1.5rem 2.25rem;
   clip-path: polygon(0% 0%, 50% 7.5vw, 100% 0%, 100% 100%, 0% 100%);
+  scroll-margin-top: -7.5vw;
 }
 @media (min-width: 25rem) {
   .skills {
-    padding: calc(4.5rem + 7.5vw) 2rem 4.5rem;
+    padding: calc(4.5rem + 7.5vw) 2rem 2.25rem;
   }
 }
 @media (min-width: 37.5rem) {
   .skills {
-    padding: calc(4.5rem + 7.5vw) 3rem 4.5rem;
+    padding: calc(4.5rem + 7.5vw) 3rem 2.25rem;
   }
 }
 @media (min-width: 50rem) {
   .skills {
-    padding: calc(6rem + 7.5vw) 5rem 6rem;
+    padding: calc(6rem + 7.5vw) 5rem 3rem;
   }
 }
 @media (min-width: 62.5rem) {
   .skills {
-    padding: calc(6rem + 7.5vw) 10% 6rem;
+    padding: calc(6rem + 7.5vw) 10% 3rem;
   }
 }
 @media (min-width: 75rem) {
   .skills {
-    padding: calc(6rem + 7.5vw) 12.5% 6rem;
+    padding: calc(6rem + 7.5vw) 12.5% 3rem;
   }
 }
 .skills__title {
@@ -663,39 +664,40 @@ body {
   grid-column: page-start/page-end;
   grid-row: 5/6;
   background-color: #00001A;
-  padding: 1rem 1.5rem calc(9rem + 7.5vw);
+  padding: 3.25rem 1.5rem calc(9rem + 7.5vw);
   clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 7.5vw), 50% 100%, 0% calc(100% - 7.5vw));
   margin: -1rem 0 0;
   color: #FFFFFF;
 }
 @media (min-width: 25rem) {
   .work {
-    padding: 1rem 2rem calc(9rem + 7.5vw);
+    padding: 3.25rem 2rem calc(9rem + 7.5vw);
   }
 }
 @media (min-width: 37.5rem) {
   .work {
-    padding: 1rem 3rem calc(9rem + 7.5vw);
+    padding: 3.25rem 3rem calc(9rem + 7.5vw);
   }
 }
 @media (min-width: 50rem) {
   .work {
-    padding: 1rem 5rem calc(10.5rem + 7.5vw);
+    padding: 3.25rem 5rem calc(10.5rem + 7.5vw);
   }
 }
 @media (min-width: 62.5rem) {
   .work {
-    padding: 1rem 10% calc(10.5rem + 7.5vw);
+    padding: 3.25rem 10% calc(10.5rem + 7.5vw);
   }
 }
 @media (min-width: 75rem) {
   .work {
-    padding: 1rem 12.5% calc(10.5rem + 7.5vw);
+    padding: 3.25rem 12.5% calc(10.5rem + 7.5vw);
   }
 }
 .work__title {
   margin-bottom: 3rem;
 }
+
 .contact {
   position: relative;
   z-index: 2;
@@ -707,6 +709,7 @@ body {
   box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 26, 0.5);
   padding: 1rem;
   color: #00001A;
+  scroll-margin-top: 4.5rem;
 }
 @media (min-width: 25rem) {
   .contact {
@@ -885,7 +888,7 @@ body {
 .footer__text {
   text-align: center;
   font-size: 0.75rem;
-  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.25);
 }
 @media (min-width: 50rem) {
   .footer__text {

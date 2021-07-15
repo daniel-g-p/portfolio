@@ -90,10 +90,10 @@
                 transform: translate(5%, -5%) scale(0.9);
             }
             &.about__option--3 {
-                transform: translate(-5%, 5%) scale(0.9);
+                transform: translate(5%, 5%) scale(0.9);
             }
             &.about__option--4 {
-                transform: translate(5%, 5%) scale(0.9);
+                transform: translate(-5%, 5%) scale(0.9);
             }
         }
         &--1 {
@@ -123,19 +123,6 @@
             }
         }
         &--3 {
-            grid-column: 1 / 2;
-            grid-row: 2 / 3;
-            justify-self: start;
-            align-self: end;
-            clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
-            transform-origin: bottom left;
-            &::after {
-                clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
-                bottom: 2.78%;
-                left: 2.78%;
-            }
-        }
-        &--4 {
             grid-column: 2 / 3;
             grid-row: 2 / 3;
             justify-self: end;
@@ -146,6 +133,19 @@
                 clip-path: polygon(0% 100%, 100% 100%, 100% 0%);
                 bottom: 2.78%;
                 right: 2.78%;
+            }
+        }
+        &--4 {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+            justify-self: start;
+            align-self: end;
+            clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+            transform-origin: bottom left;
+            &::after {
+                clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+                bottom: 2.78%;
+                left: 2.78%;
             }
         }
     }
@@ -162,10 +162,10 @@
             transform: translate(67%, -67%);
         }
         &--3 {
-            transform: translate(-67%, 67%);
+            transform: translate(67%, 67%);
         }
         &--4 {
-            transform: translate(67%, 67%);
+            transform: translate(-67%, 67%);
         }
     }
     &__content-box {

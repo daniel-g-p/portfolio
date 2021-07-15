@@ -3,22 +3,23 @@
     grid-column: page-start / page-end;
     grid-row: 4 / 5;
     background-color: $color-blue-dark;
-    padding: calc(4.5rem + 7.5vw) 1.5rem 4.5rem;
+    padding: calc(4.5rem + 7.5vw) 1.5rem 2.25rem;
     clip-path: polygon(0% 0%, 50% 7.5vw, 100% 0%, 100% 100%, 0% 100%);
+    scroll-margin-top: -7.5vw;
     @include responsive($screen-xs) {
-        padding: calc(4.5rem + 7.5vw) 2rem 4.5rem;
+        padding: calc(4.5rem + 7.5vw) 2rem 2.25rem;
     }
     @include responsive($screen-s) {
-        padding: calc(4.5rem + 7.5vw) 3rem 4.5rem;
+        padding: calc(4.5rem + 7.5vw) 3rem 2.25rem;
     }
     @include responsive($screen-m) {
-        padding: calc(6rem + 7.5vw) 5rem 6rem;
+        padding: calc(6rem + 7.5vw) 5rem 3rem;
     }
     @include responsive($screen-l) {
-        padding: calc(6rem + 7.5vw) 10% 6rem;
+        padding: calc(6rem + 7.5vw) 10% 3rem;
     }
     @include responsive($screen-xl) {
-        padding: calc(6rem + 7.5vw) 12.5% 6rem;
+        padding: calc(6rem + 7.5vw) 12.5% 3rem;
     }
     &__title {
         color: $color-white;
