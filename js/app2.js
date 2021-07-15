@@ -1,12 +1,7 @@
 class Element {
-    constructor(selector, index) {
-        if (index) {
-            this.ref = document.querySelector("." + selector + "--" + index);
-        } else {
-            this.ref = document.querySelector("." + selector);
-        }
+    constructor(selector) {
+        this.ref = document.querySelector("." + selector);
         this.className = selector;
-        this.index = index;
     }
     toggleState(newState = "active", oldState) {
         if (!oldState) {
@@ -37,6 +32,34 @@ class Element {
             return f();
         });
     }
+};
+
+class indexedElement extends Element {
+    constructor(selector, index) {
+        super();
+        this.ref = document.querySelector("." + selector + "--" + index);
+        this.className = selector;
+        this.index = index;
+    };
+}
+
+class elementGroup {
+    constructor(selector) {
+        super();
+        this.ref = document.querySelectorAll("." + selector);
+        this.className = selector;
+        this.length = this.ref.length;
+    };
+    findActive() {
+        return this.ref.find(i => i.classList.contains(this.selector + "--active"));
+    }
+    removeActive() {
+        const active = this.findActive();
+        active.classList.remove(this.selector + "--active");
+    }
+    addState(index, state = "active") {
+        this.ref[index - 1].classList.add(this.selector + "--" + state);
+    }
 }
 
 const dom = {
@@ -44,10 +67,7 @@ const dom = {
     nav: new Element("header__nav"),
     toggle: new Element("header__toggle"),
     form: new Element("contact__form"),
-    name: new Element("name"),
-    email: new Element("email"),
-    subject: new Element("subject"),
-    message: new Element("message"),
+    inputs: new elementGroup("input-group__input"),
     sections: {
         start: new Element("hero"),
         about: new Element("about"),
@@ -55,12 +75,11 @@ const dom = {
         projects: new Element("work"),
         contact: new Element("contact")
     },
-    aboutOptions: [],
-    aboutContent: [],
-    projects: [],
-    projectsContent: [],
-    projectsClose: [],
-    inputGroups: [],
+    aboutOptions: new elementGroup("about__option"),
+    aboutContent: new elementGroup("about__content"),
+    projects: new elementGroup("project"),
+    projectsToggles: new elementGroup("project__close"),
+    inputGroups: []
 }
 
 const states = {
@@ -178,6 +197,8 @@ const functions = {
     },
 
 }
+
+
 
 functions.fillArrays();
 functions.enableNavigation();
