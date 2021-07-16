@@ -34,6 +34,43 @@
         &--select {
             background-color: $color-white;
         }
+        &--error {
+            border-color: $color-red;
+            padding-right: 2.5rem;
+            &:hover,
+            &:focus {
+                border-color: $color-red;
+            }
+            &~svg {
+                opacity: 1;
+            }
+            &~label {
+                @keyframes shake-label {
+                    0% {
+                        transform: translateX(0);
+                    }
+                    10% {
+                        transform: translateX(0.25rem);
+                    }
+                    30% {
+                        transform: translateX(-0.25rem);
+                    }
+                    50% {
+                        transform: translateX(0.25rem);
+                    }
+                    70% {
+                        transform: translateX(-0.25rem);
+                    }
+                    90% {
+                        transform: translateX(0.25rem);
+                    }
+                    100% {
+                        transform: translateX(0);
+                    }
+                }
+                animation: shake-label 0.5s ease-in-out;
+            }
+        }
     }
     &__option {
         width: 4rem;
@@ -51,45 +88,45 @@
     }
 }
 
-.name,
-.email,
-.subject,
-.message {
-    &--error {
-        border-color: $color-red;
-        padding-right: 2.5rem;
-        &:hover,
-        &:focus {
-            border-color: $color-red;
-        }
-        &~svg {
-            opacity: 1;
-        }
-        &~label {
-            @keyframes shake-label {
-                0% {
-                    transform: translateX(0);
-                }
-                10% {
-                    transform: translateX(0.25rem);
-                }
-                30% {
-                    transform: translateX(-0.25rem);
-                }
-                50% {
-                    transform: translateX(0.25rem);
-                }
-                70% {
-                    transform: translateX(-0.25rem);
-                }
-                90% {
-                    transform: translateX(0.25rem);
-                }
-                100% {
-                    transform: translateX(0);
-                }
-            }
-            animation: shake-label 0.5s ease-in-out;
-        }
-    }
-}
+// .name,
+// .email,
+// .subject,
+// .message {
+//     &--error {
+//         border-color: $color-red;
+//         padding-right: 2.5rem;
+//         &:hover,
+//         &:focus {
+//             border-color: $color-red;
+//         }
+//         &~svg {
+//             opacity: 1;
+//         }
+//         &~label {
+//             @keyframes shake-label {
+//                 0% {
+//                     transform: translateX(0);
+//                 }
+//                 10% {
+//                     transform: translateX(0.25rem);
+//                 }
+//                 30% {
+//                     transform: translateX(-0.25rem);
+//                 }
+//                 50% {
+//                     transform: translateX(0.25rem);
+//                 }
+//                 70% {
+//                     transform: translateX(-0.25rem);
+//                 }
+//                 90% {
+//                     transform: translateX(0.25rem);
+//                 }
+//                 100% {
+//                     transform: translateX(0);
+//                 }
+//             }
+//             animation: shake-label 0.5s ease-in-out;
+//         }
+//     }
+// }

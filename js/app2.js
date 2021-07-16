@@ -27,47 +27,100 @@ class Element {
         }, duration);
         return;
     }
-    clickListen(f, e = "click") {
-        return this.ref.addEventListener(e, (event) => {
-            return f();
+    listen(callback, action = "click") {
+        return this.ref.addEventListener(action, (event) => {
+            callback();
         });
+    }
+    scrollTo() {
+        this.ref.scrollIntoView({ behavior: "smooth" });
     }
 };
 
-class indexedElement extends Element {
-    constructor(selector, index) {
+class inputElement extends Element {
+    constructor(selector, modifier, format) {
         super();
-        this.ref = document.querySelector("." + selector + "--" + index);
+        this.ref = document.querySelector("." + selector + "--" + modifier);
         this.className = selector;
-        this.index = index;
-    };
+        this.format = format;
+    }
+    isPresent() {
+        return this.ref.value ? true : false;
+    }
+    isValid() {
+        return this.ref.value.match(this.format) ? true : false;
+    }
 }
 
 class elementGroup {
     constructor(selector) {
-        super();
         this.ref = document.querySelectorAll("." + selector);
         this.className = selector;
         this.length = this.ref.length;
     };
-    findActive() {
-        return this.ref.find(i => i.classList.contains(this.selector + "--active"));
+    findItem(modifier = "active") {
+        let active;
+        this.ref.forEach(item => {
+            if (item.classList.contains(this.className + "--" + modifier)) {
+                active = item;
+            }
+        });
+        return active;
+    }
+    findIndex(child) {
+        let index;
+        for (let i = 0; i <= this.length; i++) {
+            if (this.ref.item(i) === child) {
+                index = i;
+            }
+        }
+        return index;
     }
     removeActive() {
-        const active = this.findActive();
-        active.classList.remove(this.selector + "--active");
+        const active = this.findItem();
+        if (active) { active.classList.remove(this.className + "--active") };
     }
     addState(index, state = "active") {
         this.ref[index - 1].classList.add(this.selector + "--" + state);
+    }
+    toggleState(index, newState = "active", oldState) {
+        if (!oldState) {
+            this.ref[index].classList.toggle(`${this.className}--${newState}`);
+        } else {
+            this.ref[index].classList.replace(`${this.className}--${oldState}`, `${this.className}--${newState}`)
+        }
+    }
+    switchToNext() {
+        const active = this.findItem();
+    }
+    listenAll(callback, action = "click") {
+        return this.ref.forEach(element => element.addEventListener(action, (event) => {
+            callback.call(this, this.findIndex(element));
+        }));
     }
 }
 
 const dom = {
     container: new Element("container"),
-    nav: new Element("header__nav"),
-    toggle: new Element("header__toggle"),
-    form: new Element("contact__form"),
-    inputs: new elementGroup("input-group__input"),
+    header: {
+        nav: new Element("header__nav"),
+        toggle: new Element("header__toggle"),
+    },
+    about: {
+        toggles: new elementGroup("about__option"),
+        items: new elementGroup("about__content")
+    },
+    projects: {
+        items: new elementGroup("project"),
+        toggles: new elementGroup("project__close")
+    },
+    contact: {
+        form: new Element("contact__form"),
+        name: new inputElement("input-group__input", "name"),
+        email: new inputElement("input-group__input", "email", /\S+@\S+\.\S+/),
+        subject: new inputElement("input-group__input", "subject"),
+        message: new inputElement("input-group__input", "message"),
+    },
     sections: {
         start: new Element("hero"),
         about: new Element("about"),
@@ -75,134 +128,73 @@ const dom = {
         projects: new Element("work"),
         contact: new Element("contact")
     },
-    aboutOptions: new elementGroup("about__option"),
-    aboutContent: new elementGroup("about__content"),
-    projects: new elementGroup("project"),
-    projectsToggles: new elementGroup("project__close"),
-    inputGroups: []
+    links: new elementGroup("header__link, .footer__link")
 }
 
-const states = {
-    about: 0,
-    projects: 0
-}
-
-const functions = {
-    fillArrays() {
-        for (i = 1; i <= document.querySelectorAll(".about__option").length; i++) {
-            dom.aboutOptions.push(new Element("about__option", i));
-            dom.aboutContent.push(new Element("about__content", i));
-        }
-        for (i = 1; i <= document.querySelectorAll(".project").length; i++) {
-            dom.projects.push(new Element("project", i));
-            dom.projectsContent.push(new Element("project__content", i));
-            dom.projectsClose.push(new Element("project__close", i));
-        }
-    },
-    enableNavigation() {
-        dom.toggle.clickListen(this.toggleHeader);
-        const links = document.querySelectorAll(".header__link, .footer__link");
-        links.forEach(l => l.addEventListener("click", (event) => {
-            event.preventDefault();
-            const target = l.getAttribute("href");
-            if (l.classList.contains("header__link")) {
-                this.toggleHeader();
-                return setTimeout(() => { this.scrollTo(target) }, 750);
-            } else {
-                return this.scrollTo(target);
-            }
-        }));
-    },
-    scrollTo(target) {
-        return dom.sections[target].ref.scrollIntoView({ behavior: "smooth" })
-    },
+const f = {
     toggleHeader() {
         dom.container.toggleState("fixed");
-        dom.toggle.toggleState();
-        dom.toggle.disable(1000);
-        if (dom.toggle.testState()) {
-            dom.nav.toggleState();
+        dom.header.toggle.toggleState();
+        dom.header.toggle.disable(1000);
+        if (dom.header.toggle.testState()) {
+            dom.header.nav.toggleState();
         } else {
-            dom.nav.toggleState("exit", "active");
-            setTimeout(() => dom.nav.toggleState("exit"), 1000);
+            dom.header.nav.toggleState("exit", "active");
+            setTimeout(() => dom.header.nav.toggleState("exit"), 1000);
         }
-    },
-    changeAbout(target, newIndex) {
-        const oldOption = dom.aboutOptions[states.about];
-        const oldContent = dom.aboutContent[states.about];
-        states.about = newIndex;
-        const newOption = target;
-        const newContent = dom.aboutContent[states.about];
-        oldOption.toggleState();
-        oldContent.toggleState("exit", "active");
-        newOption.toggleState();
-        newContent.toggleState();
-        setTimeout(() => oldContent.toggleState("exit"), 750);
-    },
-    enableAbout() {
-        const aboutInterval = setInterval(() => {
-            let newIndex = states.about + 1;
-            if (newIndex >= dom.aboutOptions.length) {
-                newIndex = 0;
-            }
-            functions.changeAbout(dom.aboutOptions[newIndex], newIndex);
-        }, 7500);
-        dom.aboutOptions.forEach(option => option.clickListen(() => {
-            clearInterval(aboutInterval);
-            functions.changeAbout(option, option.index - 1);
-        }));
-    },
-    enableProjects() {
-        dom.projects.forEach(p => p.clickListen(() => {
-            if (!p.testState()) {
-                const oldProject = dom.projects[states.projects];
-                states.projects = p.index - 1;
-                const newProject = p;
-                if (oldProject.testState()) {
-                    oldProject.toggleState();
-                }
-                newProject.toggleState();
-            }
-        }));
-        dom.projectsClose.forEach(p => p.clickListen(() => {
-            event.stopPropagation();
-            dom.projects[p.index - 1].toggleState();
-        }));
-    },
-    enableForm() {
-        const checkInputs = [dom.name, dom.email, dom.subject, dom.message];
-        dom.form.clickListen(() => {
-            const valid = this.checkForm(checkInputs);
-            valid ? console.log("error") : event.preventDefault();
-        }, "submit");
-        checkInputs.forEach(i => i.clickListen(() => {
-            i.removeState("error");
-        }, "input"))
-    },
-    checkForm(arr) {
-        const checkInputs = arr;
-        for (let item of checkInputs) {
-            if (!item.ref.value) {
-                item.addState("error")
-            }
-            if (!dom.email.ref.value.match(/\S+@\S+\.\S+/) && !dom.email.testState("error")) {
-                dom.email.addState("error");
-            }
-        };
-        return !checkInputs.some((item) => item.testState("error"));
-    },
-    removeFOUC() {
-        document.body.style.visibility = "visible";
-        document.body.style.opacity = 1;
-    },
-
+    }
 }
 
+dom.contact.inputs = [dom.contact.name, dom.contact.email, dom.contact.subject, dom.contact.message];
 
+dom.header.toggle.listen(function() {
+    f.toggleHeader();
+});
 
-functions.fillArrays();
-functions.enableNavigation();
-functions.enableAbout();
-functions.enableProjects();
-functions.enableForm();
-window.addEventListener("load", () => functions.removeFOUC());
+dom.about.toggles.listenAll(function(index) {
+    const active = this.findIndex(this.findItem())
+    setTimeout(() => { dom.about.items.toggleState(active, "exit") }, 750);
+    this.removeActive();
+    this.toggleState(index);
+    dom.about.items.toggleState(active, "exit", "active");
+    dom.about.items.toggleState(index);
+});
+
+dom.projects.items.listenAll(function(index) {
+    this.removeActive();
+    this.toggleState(index);
+});
+
+dom.projects.toggles.listenAll(function(index) {
+    event.stopPropagation();
+    dom.projects.items.removeActive();
+});
+
+dom.contact.form.listen(function() {
+    dom.contact.inputs.forEach(i => {
+        if (!i.isPresent() || !i.isValid()) {
+            event.preventDefault();
+            i.addState("error");
+        }
+    })
+}, "submit");
+
+dom.contact.inputs.forEach(i => i.listen(function() {
+    i.removeState("error");
+}, "input"));
+
+dom.links.listenAll(function(index) {
+    event.preventDefault();
+    const target = this.ref[index].getAttribute("href");
+    if (this.ref[index].classList.contains("header__link")) {
+        f.toggleHeader();
+        setTimeout(() => { dom.sections[target].scrollTo() }, 750);
+    } else {
+        dom.sections[target].scrollTo();
+    }
+});
+
+window.addEventListener("load", () => {
+    document.body.style.visibility = "visible";
+    document.body.style.opacity = 1;
+});

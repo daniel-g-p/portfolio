@@ -1215,47 +1215,17 @@ body {
 .input-group__input--select {
   background-color: #FFFFFF;
 }
-.input-group__option {
-  width: 4rem;
-}
-.input-group__error {
-  position: absolute;
-  top: 0.75em;
-  right: 0.75em;
-  width: 1.5rem;
-  height: 1.5rem;
-  fill: #FF8080;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-
-.name--error,
-.email--error,
-.subject--error,
-.message--error {
+.input-group__input--error {
   border-color: #FF8080;
   padding-right: 2.5rem;
 }
-.name--error:hover, .name--error:focus,
-.email--error:hover,
-.email--error:focus,
-.subject--error:hover,
-.subject--error:focus,
-.message--error:hover,
-.message--error:focus {
+.input-group__input--error:hover, .input-group__input--error:focus {
   border-color: #FF8080;
 }
-.name--error ~ svg,
-.email--error ~ svg,
-.subject--error ~ svg,
-.message--error ~ svg {
+.input-group__input--error ~ svg {
   opacity: 1;
 }
-.name--error ~ label,
-.email--error ~ label,
-.subject--error ~ label,
-.message--error ~ label {
+.input-group__input--error ~ label {
   animation: shake-label 0.5s ease-in-out;
 }
 @keyframes shake-label {
@@ -1280,6 +1250,20 @@ body {
   100% {
     transform: translateX(0);
   }
+}
+.input-group__option {
+  width: 4rem;
+}
+.input-group__error {
+  position: absolute;
+  top: 0.75em;
+  right: 0.75em;
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #FF8080;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
 /*# sourceMappingURL=style.comp.css.map */

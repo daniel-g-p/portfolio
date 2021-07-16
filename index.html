@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
     <style>
-        body {
+        .container {
             visibility: visible;
             opacity: 1;
         }
@@ -255,14 +255,14 @@
                 <div class="project project--1">
                     <div class="project__box">
                         <h3 class="project__title heading-3">GaliGo</h3>
-                        <div class="project__content project__content--1">
+                        <div class="project__content">
                             <p class="project__text paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid et ea minus earum quo voluptate illo doloremque labore error explicabo dolore dolorem sit eos, a incidunt laborum aspernatur quam sequi.</p>
                             <p class="project__text paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid et ea minus earum quo voluptate illo doloremque labore error explicabo dolore dolorem sit eos, a incidunt laborum aspernatur quam sequi.</p>
                             <a href="/" class="project__link link">Go to site</a>
                             <a href="/" class="project__link link">View on GitHub</a>
                         </div>
                     </div>
-                    <div class="project__close project__close--1">
+                    <div class="project__close">
                         <div class="project__close-bar project__close-bar--1"></div>
                         <div class="project__close-bar project__close-bar--2"></div>
                     </div>
@@ -273,14 +273,14 @@
                 <div class="project project--2">
                     <div class="project__box">
                         <h3 class="project__title heading-3">GaliGo</h3>
-                        <div class="project__content project__content--2">
+                        <div class="project__content">
                             <p class="project__text paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid et ea minus earum quo voluptate illo doloremque labore error explicabo dolore dolorem sit eos, a incidunt laborum aspernatur quam sequi.</p>
                             <p class="project__text paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid et ea minus earum quo voluptate illo doloremque labore error explicabo dolore dolorem sit eos, a incidunt laborum aspernatur quam sequi.</p>
                             <a href="/" class="project__link link">Go to site</a>
                             <a href="/" class="project__link link">View on GitHub</a>
                         </div>
                     </div>
-                    <div class="project__close project__close--2">
+                    <div class="project__close">
                         <div class="project__close-bar project__close-bar--1"></div>
                         <div class="project__close-bar project__close-bar--2"></div>
                     </div>
@@ -291,14 +291,14 @@
                 <div class="project project--3">
                     <div class="project__box">
                         <h3 class="project__title heading-3">GaliGo</h3>
-                        <div class="project__content project__content--3">
+                        <div class="project__content">
                             <p class="project__text paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid et ea minus earum quo voluptate illo doloremque labore error explicabo dolore dolorem sit eos, a incidunt laborum aspernatur quam sequi.</p>
                             <p class="project__text paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid et ea minus earum quo voluptate illo doloremque labore error explicabo dolore dolorem sit eos, a incidunt laborum aspernatur quam sequi.</p>
                             <a href="/" class="project__link link">Go to site</a>
                             <a href="/" class="project__link link">View on GitHub</a>
                         </div>
                     </div>
-                    <div class="project__close project__close--3">
+                    <div class="project__close">
                         <div class="project__close-bar project__close-bar--1"></div>
                         <div class="project__close-bar project__close-bar--2"></div>
                     </div>
@@ -316,14 +316,14 @@
             <p class="contact__text paragraph">Whether you want to start a new project, learn more about what I do, or just say Hi, feel free to drop me a message and I will come back to you as soon as possible.</p>
             <form action="/" class="contact__form" novalidate>
                 <div class="contact__field contact__field--name input-group">
-                    <input type="text" name="name" id="name" class="input-group__input name">
+                    <input type="text" name="name" id="name" class="input-group__input input-group__input--name">
                     <label for="name" class="input-group__label">Name</label>
                     <svg class="input-group__error">
                         <use href="img/sprite.svg#icon-error"></use>
                     </svg>
                 </div>
                 <div class="contact__field contact__field--email input-group">
-                    <input type="email" name="email" id="email" class="input-group__input email">
+                    <input type="email" name="email" id="email" class="input-group__input input-group__input--email">
                     <label for="email" class="input-group__label">Email</label>
                     <svg class="input-group__error">
                         <use href="img/sprite.svg#icon-error"></use>
@@ -331,13 +331,13 @@
                 </div>
                 <div class="contact__field contact__field--organization input-group">
                     <label for="organization" class="input-group__label">Organization</label>
-                    <input type="text" name="organization" id="organization" class="input-group__input organization">
+                    <input type="text" name="organization" id="organization" class="input-group__input input-group__input--organization">
                     <svg class="input-group__error">
                         <use href="img/sprite.svg#icon-error"></use>
                     </svg>
                 </div>
                 <div class="contact__field contact__field--language input-group">
-                    <select name="language" id="language" class="input-group__input input-group__input--select language">
+                    <select name="language" id="language" class="input-group__input input-group__input--select input-group__input--language">
                         <option class="input-group__option" value="english" selected>English</option>
                         <option class="input-group__option" value="german">Deutsch</option>
                         <option class="input-group__option" value="spanish">Espa&#241;ol</option>
@@ -350,14 +350,14 @@
                     </svg>
                 </div>
                 <div class="contact__field contact__field--subject input-group">
-                    <input type="text" name="subject" id="subject" class="input-group__input subject">
+                    <input type="text" name="subject" id="subject" class="input-group__input input-group__input--subject">
                     <label for="subject" class="input-group__label">Subject Line</label>
                     <svg class="input-group__error">
                         <use href="img/sprite.svg#icon-error"></use>
                     </svg>
                 </div>
                 <div class="contact__field contact__field--message input-group">
-                    <textarea type="text" name="message" id="message" class="input-group__input input-group__input--textarea message"></textarea>
+                    <textarea type="text" name="message" id="message" class="input-group__input input-group__input--textarea input-group__input--message"></textarea>
                     <label for="message" class="input-group__label">Message</label>
                     <svg class="input-group__error">
                         <use href="img/sprite.svg#icon-error"></use>
@@ -386,7 +386,7 @@
             <p class="footer__text paragraph">Designed and developed by Daniel Giustini Perez.</p>
         </footer>
     </div>
-    <script src="js/app.js"></script>
+    <script src="js/app2.js"></script>
 </body>
 
 </html>
