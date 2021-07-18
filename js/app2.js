@@ -90,13 +90,15 @@ class elementGroup {
             this.ref[index].classList.replace(`${this.className}--${oldState}`, `${this.className}--${newState}`)
         }
     }
-    switchToNext() {
-        const active = this.findItem();
-    }
     listenAll(callback, action = "click") {
         return this.ref.forEach(element => element.addEventListener(action, (event) => {
             callback.call(this, this.findIndex(element));
         }));
+    }
+    interval(callback, interval) {
+        return setInterval(() => {
+            callback.call(this);
+        }, interval);
     }
 }
 
@@ -108,7 +110,7 @@ const dom = {
     },
     about: {
         toggles: new elementGroup("about__option"),
-        items: new elementGroup("about__content")
+        items: new elementGroup("about__content"),
     },
     projects: {
         items: new elementGroup("project"),
@@ -142,23 +144,31 @@ const f = {
             dom.header.nav.toggleState("exit", "active");
             setTimeout(() => dom.header.nav.toggleState("exit"), 1000);
         }
+    },
+    toggleAbout(current, next) {
+        setTimeout(() => { dom.about.items.toggleState(current, "exit") }, 750);
+        dom.about.toggles.removeActive();
+        dom.about.toggles.toggleState(next);
+        dom.about.items.toggleState(current, "exit", "active");
+        dom.about.items.toggleState(next);
     }
 }
-
-dom.contact.inputs = [dom.contact.name, dom.contact.email, dom.contact.subject, dom.contact.message];
 
 dom.header.toggle.listen(function() {
     f.toggleHeader();
 });
 
-dom.about.toggles.listenAll(function(index) {
+dom.about.toggles.listenAll(function(next) {
+    clearInterval(dom.about.loop);
     const active = this.findIndex(this.findItem())
-    setTimeout(() => { dom.about.items.toggleState(active, "exit") }, 750);
-    this.removeActive();
-    this.toggleState(index);
-    dom.about.items.toggleState(active, "exit", "active");
-    dom.about.items.toggleState(index);
+    f.toggleAbout(active, next);
 });
+
+dom.about.loop = dom.about.toggles.interval(function() {
+    let active = this.findIndex(this.findItem());
+    let next = (active + 1 === this.length) ? 0 : active + 1;
+    f.toggleAbout(active, next);
+}, 5000);
 
 dom.projects.items.listenAll(function(index) {
     this.removeActive();
@@ -169,6 +179,8 @@ dom.projects.toggles.listenAll(function(index) {
     event.stopPropagation();
     dom.projects.items.removeActive();
 });
+
+dom.contact.inputs = [dom.contact.name, dom.contact.email, dom.contact.subject, dom.contact.message];
 
 dom.contact.form.listen(function() {
     dom.contact.inputs.forEach(i => {
