@@ -1,12 +1,7 @@
 class Element {
-    constructor(selector, index) {
-        if (index) {
-            this.ref = document.querySelector("." + selector + "--" + index);
-        } else {
-            this.ref = document.querySelector("." + selector);
-        }
+    constructor(selector) {
+        this.ref = document.querySelector("." + selector);
         this.className = selector;
-        this.index = index;
     }
     toggleState(newState = "active", oldState) {
         if (!oldState) {
@@ -32,22 +27,102 @@ class Element {
         }, duration);
         return;
     }
-    clickListen(f, e = "click") {
-        return this.ref.addEventListener(e, (event) => {
-            return f();
+    listen(callback, action = "click") {
+        return this.ref.addEventListener(action, (event) => {
+            callback();
         });
+    }
+    scrollTo() {
+        this.ref.scrollIntoView({ behavior: "smooth" });
+    }
+};
+
+class inputElement extends Element {
+    constructor(selector, modifier, format) {
+        super();
+        this.ref = document.querySelector("." + selector + "--" + modifier);
+        this.className = selector;
+        this.format = format;
+    }
+    isPresent() {
+        return this.ref.value ? true : false;
+    }
+    isValid() {
+        return this.ref.value.match(this.format) ? true : false;
+    }
+}
+
+class elementGroup {
+    constructor(selector) {
+        this.ref = document.querySelectorAll("." + selector);
+        this.className = selector;
+        this.length = this.ref.length;
+    };
+    findItem(modifier = "active") {
+        let active;
+        this.ref.forEach(item => {
+            if (item.classList.contains(this.className + "--" + modifier)) {
+                active = item;
+            }
+        });
+        return active;
+    }
+    findIndex(child) {
+        let index;
+        for (let i = 0; i <= this.length; i++) {
+            if (this.ref.item(i) === child) {
+                index = i;
+            }
+        }
+        return index;
+    }
+    removeActive() {
+        const active = this.findItem();
+        if (active) { active.classList.remove(this.className + "--active") };
+    }
+    addState(index, state = "active") {
+        this.ref[index - 1].classList.add(this.selector + "--" + state);
+    }
+    toggleState(index, newState = "active", oldState) {
+        if (!oldState) {
+            this.ref[index].classList.toggle(`${this.className}--${newState}`);
+        } else {
+            this.ref[index].classList.replace(`${this.className}--${oldState}`, `${this.className}--${newState}`)
+        }
+    }
+    listenAll(callback, action = "click") {
+        return this.ref.forEach(element => element.addEventListener(action, (event) => {
+            callback.call(this, this.findIndex(element));
+        }));
+    }
+    interval(callback, interval) {
+        return setInterval(() => {
+            callback.call(this);
+        }, interval);
     }
 }
 
 const dom = {
     container: new Element("container"),
-    nav: new Element("header__nav"),
-    toggle: new Element("header__toggle"),
-    form: new Element("contact__form"),
-    name: new Element("name"),
-    email: new Element("email"),
-    subject: new Element("subject"),
-    message: new Element("message"),
+    header: {
+        nav: new Element("header__nav"),
+        toggle: new Element("header__toggle"),
+    },
+    about: {
+        toggles: new elementGroup("about__option"),
+        items: new elementGroup("about__content"),
+    },
+    projects: {
+        items: new elementGroup("project"),
+        toggles: new elementGroup("project__close")
+    },
+    contact: {
+        form: new Element("contact__form"),
+        name: new inputElement("input-group__input", "name"),
+        email: new inputElement("input-group__input", "email", /\S+@\S+\.\S+/),
+        subject: new inputElement("input-group__input", "subject"),
+        message: new inputElement("input-group__input", "message"),
+    },
     sections: {
         start: new Element("hero"),
         about: new Element("about"),
@@ -55,133 +130,83 @@ const dom = {
         projects: new Element("work"),
         contact: new Element("contact")
     },
-    aboutOptions: [],
-    aboutContent: [],
-    projects: [],
-    projectsContent: [],
-    projectsClose: [],
-    inputGroups: [],
+    links: new elementGroup("header__link, .footer__link")
 }
 
-const states = {
-    about: 0,
-    projects: 0
-}
-
-const functions = {
-    fillArrays() {
-        for (i = 1; i <= document.querySelectorAll(".about__option").length; i++) {
-            dom.aboutOptions.push(new Element("about__option", i));
-            dom.aboutContent.push(new Element("about__content", i));
-        }
-        for (i = 1; i <= document.querySelectorAll(".project").length; i++) {
-            dom.projects.push(new Element("project", i));
-            dom.projectsContent.push(new Element("project__content", i));
-            dom.projectsClose.push(new Element("project__close", i));
-        }
-    },
-    enableNavigation() {
-        dom.toggle.clickListen(this.toggleHeader);
-        const links = document.querySelectorAll(".header__link, .footer__link");
-        links.forEach(l => l.addEventListener("click", (event) => {
-            event.preventDefault();
-            const target = l.getAttribute("href");
-            if (l.classList.contains("header__link")) {
-                this.toggleHeader();
-                return setTimeout(() => { this.scrollTo(target) }, 750);
-            } else {
-                return this.scrollTo(target);
-            }
-        }));
-    },
-    scrollTo(target) {
-        return dom.sections[target].ref.scrollIntoView({ behavior: "smooth" })
-    },
+const f = {
     toggleHeader() {
         dom.container.toggleState("fixed");
-        dom.toggle.toggleState();
-        dom.toggle.disable(1000);
-        if (dom.toggle.testState()) {
-            dom.nav.toggleState();
+        dom.header.toggle.toggleState();
+        dom.header.toggle.disable(1000);
+        if (dom.header.toggle.testState()) {
+            dom.header.nav.toggleState();
         } else {
-            dom.nav.toggleState("exit", "active");
-            setTimeout(() => dom.nav.toggleState("exit"), 1000);
+            dom.header.nav.toggleState("exit", "active");
+            setTimeout(() => dom.header.nav.toggleState("exit"), 1000);
         }
     },
-    changeAbout(target, newIndex) {
-        const oldOption = dom.aboutOptions[states.about];
-        const oldContent = dom.aboutContent[states.about];
-        states.about = newIndex;
-        const newOption = target;
-        const newContent = dom.aboutContent[states.about];
-        oldOption.toggleState();
-        oldContent.toggleState("exit", "active");
-        newOption.toggleState();
-        newContent.toggleState();
-        setTimeout(() => oldContent.toggleState("exit"), 750);
-    },
-    enableAbout() {
-        const aboutInterval = setInterval(() => {
-            let newIndex = states.about + 1;
-            if (newIndex >= dom.aboutOptions.length) {
-                newIndex = 0;
-            }
-            functions.changeAbout(dom.aboutOptions[newIndex], newIndex);
-        }, 7500);
-        dom.aboutOptions.forEach(option => option.clickListen(() => {
-            clearInterval(aboutInterval);
-            functions.changeAbout(option, option.index - 1);
-        }));
-    },
-    enableProjects() {
-        dom.projects.forEach(p => p.clickListen(() => {
-            if (!p.testState()) {
-                const oldProject = dom.projects[states.projects];
-                states.projects = p.index - 1;
-                const newProject = p;
-                if (oldProject.testState()) {
-                    oldProject.toggleState();
-                }
-                newProject.toggleState();
-            }
-        }));
-        dom.projectsClose.forEach(p => p.clickListen(() => {
-            event.stopPropagation();
-            dom.projects[p.index - 1].toggleState();
-        }));
-    },
-    enableForm() {
-        const checkInputs = [dom.name, dom.email, dom.subject, dom.message];
-        dom.form.clickListen(() => {
-            const valid = this.checkForm(checkInputs);
-            valid ? console.log("error") : event.preventDefault();
-        }, "submit");
-        checkInputs.forEach(i => i.clickListen(() => {
-            i.removeState("error");
-        }, "input"))
-    },
-    checkForm(arr) {
-        const checkInputs = arr;
-        for (let item of checkInputs) {
-            if (!item.ref.value) {
-                item.addState("error")
-            }
-            if (!dom.email.ref.value.match(/\S+@\S+\.\S+/) && !dom.email.testState("error")) {
-                dom.email.addState("error");
-            }
-        };
-        return !checkInputs.some((item) => item.testState("error"));
-    },
-    removeFOUC() {
-        document.body.style.visibility = "visible";
-        document.body.style.opacity = 1;
-    },
-
+    toggleAbout(current, next) {
+        setTimeout(() => { dom.about.items.toggleState(current, "exit") }, 750);
+        dom.about.toggles.removeActive();
+        dom.about.toggles.toggleState(next);
+        dom.about.items.toggleState(current, "exit", "active");
+        dom.about.items.toggleState(next);
+    }
 }
 
-functions.fillArrays();
-functions.enableNavigation();
-functions.enableAbout();
-functions.enableProjects();
-functions.enableForm();
-window.addEventListener("load", () => functions.removeFOUC());
+dom.header.toggle.listen(function() {
+    f.toggleHeader();
+});
+
+dom.about.toggles.listenAll(function(next) {
+    clearInterval(dom.about.loop);
+    const active = this.findIndex(this.findItem())
+    f.toggleAbout(active, next);
+});
+
+dom.about.loop = dom.about.toggles.interval(function() {
+    let active = this.findIndex(this.findItem());
+    let next = (active + 1 === this.length) ? 0 : active + 1;
+    f.toggleAbout(active, next);
+}, 5000);
+
+dom.projects.items.listenAll(function(index) {
+    this.removeActive();
+    this.toggleState(index);
+});
+
+dom.projects.toggles.listenAll(function(index) {
+    event.stopPropagation();
+    dom.projects.items.removeActive();
+});
+
+dom.contact.inputs = [dom.contact.name, dom.contact.email, dom.contact.subject, dom.contact.message];
+
+dom.contact.form.listen(function() {
+    dom.contact.inputs.forEach(i => {
+        if (!i.isPresent() || !i.isValid()) {
+            event.preventDefault();
+            i.addState("error");
+        }
+    })
+}, "submit");
+
+dom.contact.inputs.forEach(i => i.listen(function() {
+    i.removeState("error");
+}, "input"));
+
+dom.links.listenAll(function(index) {
+    event.preventDefault();
+    const target = this.ref[index].getAttribute("href");
+    if (this.ref[index].classList.contains("header__link")) {
+        f.toggleHeader();
+        setTimeout(() => { dom.sections[target].scrollTo() }, 750);
+    } else {
+        dom.sections[target].scrollTo();
+    }
+});
+
+window.addEventListener("load", () => {
+    document.body.style.visibility = "visible";
+    document.body.style.opacity = 1;
+});
